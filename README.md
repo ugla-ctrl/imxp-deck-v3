@@ -4,11 +4,12 @@ A fully hand-coded, cinematic web deck for IMXP. Unlike options A and B (which p
 the Canva slide images), option C is written from scratch in HTML/CSS/JS with a rewritten,
 tightened investor narrative and an animated cosmic backdrop.
 
-- **Design:** dark cosmic theme, live canvas backdrop (drifting starfield + a slow breathing
-  eclipse corona), Archivo display type, fade-rise slide transitions.
-- **Content:** condensed 13-slide narrative synthesized from the IMXP source deck and the
-  content editor. All figures reconciled to source (traction, financials framed as the stated
-  "10x by 2028", the ask, team, roadmap).
+- **Design:** pitch-deck style in the source deck's design language (Archivo headlines,
+  eyebrow labels, imxp logo top-right, "Fundraise Deck" footer, the Canva pill palette),
+  mixing white content slides with full-bleed photo slides.
+- **Photos:** real Iceland Eclipse 2026 press photos from the IEpress gallery
+  (media/photos/), no generated imagery.
+- **Content:** 14 slides taken from the IMXP Content Editor source, figures verbatim.
 - **Video:** the Festival-in-a-Box demo plays inline as a native slide.
 - **Email gate:** front-end demo gate (nothing sent or saved to a server).
 
