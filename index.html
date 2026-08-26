@@ -7,7 +7,7 @@
 <meta name="description" content="IMXP — Immersive Experiences at Global Scale. Fundraise Deck." />
 <meta property="og:title" content="IMXP · Fundraise Deck" />
 <meta property="og:description" content="Immersive Experiences at Global Scale." />
-<meta property="og:image" content="media/photos/cover.jpg" />
+<meta property="og:image" content="media/photos/crowd-outdoors.jpg" />
 <meta name="theme-color" content="#000000" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='black'/><text y='72' x='50' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>i</text></svg>" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -171,6 +171,33 @@
   .subhead{font-family:var(--disp);font-weight:800;letter-spacing:.14em;text-transform:uppercase;
     font-size:clamp(.66rem,.9cqw,.78rem);color:#9a9aa6;margin-bottom:1em}
 
+  /* half-bleed photo, Canva style */
+  .half-img{position:absolute;top:0;right:0;bottom:0;width:42cqw;height:100%;object-fit:cover;z-index:0}
+  .content-l{position:relative;z-index:2;max-width:50cqw}
+  /* big stat callouts */
+  .bignums{display:flex;gap:clamp(28px,5cqw,84px);flex-wrap:wrap;align-items:flex-start}
+  .bignum .n{font-family:var(--disp);font-weight:900;font-size:clamp(2rem,5.2cqw,4.4rem);line-height:1;letter-spacing:-.02em}
+  .bignum.teal .n{color:var(--teal)} .bignum.yellow .n{color:var(--yellow)} .bignum.lav .n{color:var(--lav)}
+  .bignum .l{margin-top:.45em;font-size:clamp(.68rem,1cqw,.92rem);color:var(--dim-d);max-width:20ch;line-height:1.45}
+  /* image panels */
+  .imgpanel{border-radius:14px;overflow:hidden;border:1px solid var(--line-l);background:#0b0b0f}
+  .imgpanel img{width:100%;height:auto;display:block}
+  .slide.dark .imgpanel{border-color:var(--line-d)}
+  .chartrow{display:grid;grid-template-columns:2fr 3fr;gap:clamp(14px,2cqw,28px);align-items:stretch}
+  .chartrow .imgpanel{display:flex;align-items:center}
+  /* strategy pills */
+  .pillrow{display:flex;gap:clamp(10px,1.4cqw,18px);flex-wrap:wrap}
+  .pill{border-radius:999px;padding:clamp(8px,1.2cqh,13px) clamp(14px,1.9cqw,26px);
+    font-family:var(--disp);font-weight:800;color:var(--ink);font-size:clamp(.66rem,1cqw,.9rem);line-height:1.3}
+  .pill.teal{background:var(--teal)} .pill.green{background:var(--green)}
+  .pill.yellow{background:var(--yellow)} .pill.lav{background:var(--lav)} .pill.orange{background:var(--orange)}
+  /* the ask */
+  .askrow{display:flex;align-items:center;gap:clamp(28px,5cqw,72px);flex-wrap:wrap}
+  .asknum{font-family:var(--disp);font-weight:900;font-size:clamp(3.2rem,9cqw,7.2rem);line-height:.95;letter-spacing:-.02em;color:var(--ink)}
+  .stackbar{display:flex;height:clamp(34px,5.6cqh,50px);border-radius:12px;overflow:hidden}
+  .stackbar div{display:flex;align-items:center;justify-content:center;font-family:var(--disp);
+    font-weight:800;color:var(--ink);font-size:clamp(.68rem,1.05cqw,.95rem)}
+
   /* team with photos */
   .teamgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(8px,1cqw,14px)}
   .invrow{display:grid;grid-template-columns:repeat(4,clamp(90px,11cqw,160px));gap:clamp(10px,1.4cqw,18px)}
@@ -262,8 +289,8 @@
 
   <!-- 1 · COVER -->
   <section class="slide photo center active">
-    <div class="bg" style="background-image:url('media/photos/cover.jpg')"></div>
-    <div class="shade"></div>
+    <div class="bg" style="background-image:url('media/photos/crowd-outdoors.jpg')"></div>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.52),rgba(0,0,0,.34) 45%,rgba(0,0,0,.62))"></div>
     <img class="st coverlogo" src="imxp-logo.png" alt="IMXP" />
     <div class="st tagbox">Immersive Experiences<br/>at Global Scale</div>
     <div class="st cover-stats">
@@ -285,49 +312,61 @@
   </section>
 
   <!-- 3 · MARKET -->
-  <section class="slide light">
+  <section class="slide photo">
+    <div class="bg" style="background-image:url('media/photos/crowd-hands.jpg')"></div>
+    <div class="shade"></div>
     <div class="chip">Market Opportunity</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st">Real-world experience is in demand</h2>
-    <p class="st sub mt-s" style="font-weight:600;color:var(--ink)">In the midst of a loneliness epidemic, people want to spend more time IRL</p>
-    <ul class="st blist mt">
-      <li><b>80% of Millennials and younger</b> prefer real-world experiences to possessions</li>
-      <li>The Experience Economy already exceeds <b>$100B and growing at 8% CAGR</b></li>
-      <li>Notable transactions in the space include <b>SXSW, Meow Wolf, and Illuminarium</b></li>
-    </ul>
+    <h2 class="st" style="color:#fff;font-size:clamp(1.8rem,4.4cqw,3.8rem);max-width:15ch">Real-world experience is in demand</h2>
+    <p class="st mt-s" style="font-family:var(--disp);font-weight:600;color:#fff;font-size:clamp(.95rem,1.7cqw,1.4rem);max-width:36ch">In the midst of a loneliness epidemic, people want to spend more time IRL</p>
+    <div class="st bignums mt">
+      <div class="bignum teal"><div class="n">80%</div><div class="l">of Millennials and younger prefer real-world experiences to possessions</div></div>
+      <div class="bignum yellow"><div class="n">$100B+</div><div class="l">the Experience Economy today, and growing</div></div>
+      <div class="bignum lav"><div class="n">8%</div><div class="l">CAGR, with notable transactions incl. SXSW, Meow Wolf, and Illuminarium</div></div>
+    </div>
     <div class="fd">Fundraise Deck</div>
   </section>
 
   <!-- 4 · SOLUTION -->
   <section class="slide light">
+    <img class="half-img" src="media/photos/site-setup.jpg" alt="Iceland Eclipse festival site" />
     <div class="chip">Solution</div>
-    <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <div class="split">
-      <div>
-        <h2 class="st">We are building the platform for rapidly deploying festivals and transformative gatherings globally</h2>
-        <p class="st mt">The next generation of complex, distributed experiences and work will require both aligned people and systems.</p>
+    <div class="logo"><img src="imxp-logo.png" alt="" style="filter:none" /></div>
+    <div class="content-l">
+      <h2 class="st" style="max-width:none">We are building the platform for rapidly deploying festivals and transformative gatherings globally</h2>
+      <p class="st mt">The next generation of complex, distributed experiences and work will require both <strong>aligned people and systems</strong>.</p>
+      <div class="st pillrow mt">
+        <div class="pill green">Rapid deployment</div>
+        <div class="pill teal">Globally distributed</div>
+        <div class="pill lav">People + systems aligned</div>
       </div>
-      <div class="st figure"><img src="media/photos/site-setup.jpg" alt="Iceland Eclipse festival site" /></div>
     </div>
-    <div class="fd">Fundraise Deck</div>
+    <div class="fd" style="color:#fff">Fundraise Deck</div>
   </section>
 
   <!-- 5 · TRACTION -->
-  <section class="slide light">
+  <section class="slide light" style="padding-top:clamp(60px,9.5cqh,104px);padding-bottom:clamp(56px,9cqh,96px)">
     <div class="chip">Traction</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st">Revenue-generating events serve as an R&amp;D lab for the operating system</h2>
-    <div class="st tiles t3 mt">
-      <div class="tile green"><div class="n">$4,187,246</div><div class="l">Iceland combined revenue · Eclipse Festival + The Portal</div></div>
-      <div class="tile teal"><div class="n">$3,674,341</div><div class="l">Festival revenue</div></div>
-      <div class="tile lav"><div class="n">$512,905</div><div class="l">The Portal, on the IMXP platform</div></div>
+    <h2 class="st" style="font-size:clamp(1.2rem,2.6cqw,2.3rem);max-width:none">Revenue-generating events serve as an R&amp;D lab for the operating system</h2>
+    <div class="st split mt-s" style="grid-template-columns:1.02fr .98fr;align-items:start">
+      <div>
+        <div class="tiles" style="grid-template-columns:1fr;gap:clamp(8px,1cqw,14px)">
+          <div class="tile green"><div class="n">$4,187,246</div><div class="l">Iceland combined revenue · Eclipse Festival + The Portal</div></div>
+        </div>
+        <div class="tiles mt-s" style="grid-template-columns:1fr 1fr;gap:clamp(8px,1cqw,14px)">
+          <div class="tile teal"><div class="n" style="font-size:clamp(1rem,1.9cqw,1.7rem)">$3,674,341</div><div class="l">Festival revenue</div></div>
+          <div class="tile lav"><div class="n" style="font-size:clamp(1rem,1.9cqw,1.7rem)">$512,905</div><div class="l">The Portal, on the IMXP platform</div></div>
+        </div>
+        <div class="imgpanel mt-s"><img src="media/people/map.jpg" alt="Global community map" /></div>
+      </div>
+      <ul class="blist" style="margin-top:0">
+        <li><b>Iceland Eclipse 2026:</b> $4.2M revenue from 2,600 participants</li>
+        <li><b>Engaged global growth:</b> 50K+ destination event community, contributors from 70+ countries</li>
+        <li><b>Platform in beta:</b> The Portal (Analog Space Mission) &amp; WEX Program: 831 applicants, 109 confirmed participants</li>
+        <li><b>Track record:</b> founder created Texas Eclipse, a $20M revenue, 38,000 person gathering in 2024</li>
+      </ul>
     </div>
-    <ul class="st blist mt-s">
-      <li><b>Iceland Eclipse 2026:</b> $4.2M revenue from 2,600 participants</li>
-      <li><b>Engaged global growth:</b> 50K+ destination event community, contributors from 70+ countries</li>
-      <li><b>Platform in beta:</b> The Portal (Analog Space Mission) &amp; WEX Program: 831 applicants, 109 confirmed participants</li>
-      <li><b>Track record:</b> founder created Texas Eclipse, a $20M revenue, 38,000 person gathering in 2024</li>
-    </ul>
     <div class="fd">Fundraise Deck</div>
   </section>
 
@@ -375,52 +414,59 @@
   </section>
 
   <!-- 8 · PRODUCT / OS -->
-  <section class="slide light">
+  <section class="slide dark">
     <div class="chip">Product</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st">Our vertically-integrated platform increases margins by growing revenue, aligning operations and automating production</h2>
-    <div class="st cards mt">
-      <div class="card"><div class="k">01</div><div class="h">Participation Layer</div><p>Volunteer, ritual, contribution events</p></div>
-      <div class="card"><div class="k">02</div><div class="h">Unified Profile</div><p>Identity + behavior + reputation</p></div>
-      <div class="card"><div class="k">03</div><div class="h">Reputation Graph</div><p>Trust scores, role progression</p></div>
-      <div class="card"><div class="k">04</div><div class="h">Agent Crew</div><p>Programmable AI workflows</p></div>
-      <div class="card"><div class="k">05</div><div class="h">Portal</div><p>Member-facing surface, deep personalization</p></div>
+    <h2 class="st" style="color:#fff;max-width:none;font-size:clamp(1.2rem,2.6cqw,2.3rem)">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
+    <div class="st imgpanel mt"><img src="media/people/os-shot.jpg" alt="IMXP Operating System, in build: Participation Layer, Unified Profile, Reputation Graph, Agent Crew, Portal" /></div>
+    <div class="st pillrow mt">
+      <div class="pill yellow">Event Growth Engine · community-led sales &amp; marketing</div>
+      <div class="pill teal">Experience as a Service · participation management &amp; incentivization</div>
+      <div class="pill lav">Festival-in-a-box · planning &amp; production automation</div>
     </div>
-    <p class="st mt-s"><strong>Event Growth Engine</strong> (community-led sales &amp; marketing) · <strong>Experience as a Service</strong> (participation management &amp; incentivization) · <strong>Festival-in-a-box</strong> (planning &amp; production automation)</p>
     <div class="fd">Fundraise Deck</div>
   </section>
 
   <!-- 9 · FINANCIAL PROJECTIONS -->
-  <section class="slide light">
+  <section class="slide dark">
     <div class="chip">Financial Projections</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st">By 2028 we will 10x revenue with the majority of the margins driven by the platform as Experience as a Service</h2>
-    <div class="st bars">
-      <div class="bar"><div class="v">$4.2M</div><div class="col" style="height:10%"></div><div class="yr">2026 · actual</div></div>
-      <div class="bar"><div class="v">&nbsp;</div><div class="col" style="height:45%"></div><div class="yr">2027</div></div>
-      <div class="bar"><div class="v">~10x</div><div class="col" style="height:100%"></div><div class="yr">2028</div></div>
+    <h2 class="st" style="color:#fff;max-width:none;font-size:clamp(1.2rem,2.6cqw,2.3rem)">By 2028 we will 10x revenue with the majority of the margins driven by the platform as Experience as a Service</h2>
+    <div class="st chartrow mt">
+      <div class="imgpanel"><img src="media/people/chart-users.jpg" alt="Projected user growth 2026-2030" /></div>
+      <div class="imgpanel"><img src="media/people/chart-fin.jpg" alt="Financial projections through 2030: revenue, expenses, net profit" /></div>
     </div>
-    <p class="st mt-s" style="font-size:.78rem;color:#9a9aa6;max-width:none">The projections through 2030 are forward-looking statements based on current expectations and assumptions; actual results may vary materially. Financial pro forma provided upon request.</p>
+    <p class="st mt-s" style="font-size:clamp(.6rem,.85cqw,.78rem);color:var(--faint-d);max-width:none">The projections through the end of 2030 are forward-looking statements based on current expectations and assumptions; actual results may vary materially. *Financial pro forma provided upon request.</p>
     <div class="fd">Fundraise Deck</div>
   </section>
 
   <!-- 10 · FUNDRAISE DETAILS -->
-  <section class="slide light">
+  <section class="slide light" style="padding-top:clamp(60px,9.5cqh,104px);padding-bottom:clamp(56px,9cqh,96px)">
     <div class="chip">Fundraise Details</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st">We're raising a seed round to expand our global events network while building out the experiential platform</h2>
-    <div class="st terms">
-      <div><div class="tk">Round</div><div class="tv">Seed</div></div>
-      <div><div class="tk">Raise</div><div class="tv">$1M</div></div>
-      <div><div class="tk">Status</div><div class="tv">SAFE Note · $10M Cap</div></div>
-      <div><div class="tk">Committed</div><div class="tv">First $350K</div></div>
+    <h2 class="st" style="font-size:clamp(1.15rem,2.4cqw,2.1rem);max-width:none">We're raising a seed round to expand our global events network while building out the experiential platform</h2>
+    <div class="st askrow mt">
+      <div class="asknum">$1M</div>
+      <div class="terms" style="margin-top:0">
+        <div><div class="tk">Round</div><div class="tv">Seed</div></div>
+        <div><div class="tk">Status</div><div class="tv">SAFE Note · $10M Cap</div></div>
+        <div><div class="tk">Committed</div><div class="tv">First $350K</div></div>
+        <div><div class="tk">Prior round</div><div class="tv">$750K Pre-Seed · 2025</div></div>
+      </div>
     </div>
-    <div class="st uop mt">
-      <div class="item"><div class="pct">50%</div><div class="amt">$500K</div><div class="what">Destination Experience Development</div></div>
-      <div class="item"><div class="pct">30%</div><div class="amt">$300K</div><div class="what">Strategic Dev Team Hires &amp; Operating System Training</div></div>
-      <div class="item"><div class="pct">20%</div><div class="amt">$200K</div><div class="what">Operating System Build to unlock Experience as a Service Revenue</div></div>
+    <div class="st mt">
+      <div class="subhead" style="margin-bottom:.55em">Use of Proceeds</div>
+      <div class="stackbar">
+        <div style="width:50%;background:var(--teal)">50% · $500K</div>
+        <div style="width:30%;background:var(--yellow)">30% · $300K</div>
+        <div style="width:20%;background:var(--lav)">20% · $200K</div>
+      </div>
     </div>
-    <p class="st mt-s" style="color:#9a9aa6;font-size:.85rem">$750K Pre-Seed round in 2025 ($5M Post). First $350K committed from previous investors.</p>
+    <div class="st uop mt-s">
+      <div class="item"><div class="amt" style="margin-top:0">Destination Experience Development</div><div class="what">50% · $500K. Expanding the global events network.</div></div>
+      <div class="item"><div class="amt" style="margin-top:0">Strategic Dev Team Hires &amp; OS Training</div><div class="what">30% · $300K. The team that builds the platform.</div></div>
+      <div class="item"><div class="amt" style="margin-top:0">Operating System Build</div><div class="what">20% · $200K. Unlocking Experience as a Service revenue.</div></div>
+    </div>
     <div class="fd">Fundraise Deck</div>
   </section>
 
@@ -450,9 +496,9 @@
         <div class="tcard"><img src="media/people/rave.jpg" alt="Ravé Mehta"/><div class="nm">Ravé Mehta</div><div class="rl">Flow Capital · Award-Winning Pianist &amp; Bestselling Author</div></div>
       </div>
     </div>
-    <div class="st expanel mt-s">
-      <div class="xlab">Our Experience</div>
-      <img src="media/people/logos.jpg" alt="Texas Eclipse, Electric Forest, Trailblazers, BTC, ATX DAO, Euphoria, Everfest, Space for Humanity, Cosmic Perspective, Everyday Astronaut, Interplanetary Capital, Flow Capital, Playing for Change Foundation" />
+    <div class="st expanel mt-s" style="flex-direction:column;align-items:stretch;gap:.55em">
+      <div class="xlab" style="font-size:clamp(.66rem,1cqw,.85rem);letter-spacing:.14em;text-transform:uppercase">Our Experience</div>
+      <img src="media/people/logos-strip.jpg" style="width:100%;height:auto;max-width:none;margin:0" alt="Texas Eclipse, Electric Forest, Trailblazers, BTC, ATX DAO, Euphoria, Everfest, Space for Humanity, Cosmic Perspective, Everyday Astronaut, Interplanetary Capital, Flow Capital, Playing for Change Foundation" />
     </div>
     <div class="fd">Fundraise Deck</div>
   </section>
