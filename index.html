@@ -553,13 +553,14 @@
     <img class="gmark" src="imxp-logo.png" alt="IMXP" />
     <div class="gsub">Fundraise Deck</div>
     <h2>View the deck</h2>
-    <p>Enter your email to continue.</p>
+    <p>Enter your details to continue.</p>
     <form id="gateForm" novalidate>
+      <input id="gateName" type="text" placeholder="Full name" autocomplete="name" />
       <input id="gateEmail" type="email" placeholder="you@company.com" autocomplete="email" />
       <div class="err" id="gateErr"></div>
-      <button type="submit">View deck →</button>
+      <button type="submit" id="gateBtn">View deck →</button>
     </form>
-    <div class="fine">Demo only · nothing is sent or saved to a server.</div>
+    <div class="fine">Details are kept private and used only to send updates.</div>
   </div>
 </div>
 
@@ -608,18 +609,39 @@ go(start>=1&&start<=slides.length?start-1:0);
   pb.addEventListener('click',()=>{vid.controls=true;pb.classList.add('gone');vid.play();});
 })();
 
-/* email gate (demo only, front-end) */
+/* email gate: captures name + email into Supabase (australasia-eclipse-2028 project,
+   isolated imxp_deck_leads table, insert-only RLS), same pattern as the Midnight Sun deck gate */
 (function(){
-  const KEY='imxp_demo_unlocked';
+  const KEY='imxp_deck_access';
+  const SUPA_URL='https://qmxhsendoepqeyeolzil.supabase.co';
+  const SUPA_KEY='sb_publishable_qU4HH0buJWQW3_RJk3QlYg_5r84ZfdP';
   const gate=document.getElementById('gate');
   if(localStorage.getItem(KEY)){gate.classList.add('hide');return;}
-  const form=document.getElementById('gateForm'),email=document.getElementById('gateEmail'),err=document.getElementById('gateErr');
+  const form=document.getElementById('gateForm');
+  const nameEl=document.getElementById('gateName');
+  const email=document.getElementById('gateEmail');
+  const err=document.getElementById('gateErr');
+  const btn=document.getElementById('gateBtn');
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  form.addEventListener('submit',e=>{e.preventDefault();
-    const v=email.value.trim();
-    if(!re.test(v)){err.textContent='Please enter a valid email address.';email.focus();return;}
+
+  function unlock(){
     try{localStorage.setItem(KEY,'1');}catch(_){}
     gate.classList.add('hide');
+  }
+
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=email.value.trim();
+    const n=nameEl.value.trim();
+    if(!re.test(v)){err.textContent='Please enter a valid email address.';email.focus();return;}
+    err.textContent='';
+    btn.disabled=true; btn.textContent='Opening…';
+    const payload={email:v, name:n||null, source:'imxp-deck-gate', referrer:document.referrer||null, user_agent:navigator.userAgent};
+    fetch(SUPA_URL+'/rest/v1/imxp_deck_leads',{
+      method:'POST',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    }).then(unlock).catch(unlock);   // never trap a real viewer behind a network hiccup
   });
   email.focus();
 })();
