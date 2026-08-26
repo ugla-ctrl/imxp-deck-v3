@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>IMXP · Investment Overview</title>
+<meta name="description" content="IMXP is building the operating system for the experiential age. Investment overview." />
+<meta property="og:title" content="IMXP · Investment Overview" />
+<meta property="og:description" content="The operating system for the experiential age." />
+<meta name="theme-color" content="#05050a" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='black'/><text y='72' x='50' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>i</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05050a; --ink:#f4f4f8; --dim:rgba(244,244,248,.6); --faint:rgba(244,244,248,.4);
+    --line:rgba(244,244,248,.14);
+    --violet:#8f8ae6; --violet-2:#b3aef2; --teal:#8fe6e2; --amber:#ffd27a; --rose:#e79a9a;
+    --sans:'Inter','Helvetica Neue',Arial,sans-serif;
+    --disp:'Archivo','Helvetica Neue',Arial,sans-serif;
+    --edge:clamp(28px,5vw,96px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    overflow:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    -webkit-tap-highlight-color:transparent;
+  }
+  #sky{position:fixed;inset:0;z-index:0;display:block}
+
+  /* ---------- deck / slides ---------- */
+  #deck{position:fixed;inset:0;z-index:1}
+  .slide{
+    position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(56px,9vh,120px) var(--edge) clamp(72px,11vh,132px);
+    opacity:0;visibility:hidden;transform:translateY(22px);
+    transition:opacity .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),visibility .6s;
+    pointer-events:none;
+  }
+  .slide.active{opacity:1;visibility:visible;transform:none;pointer-events:auto}
+  .slide.active .stagger{animation:rise .7s cubic-bezier(.22,.61,.36,1) both}
+  .slide.active .stagger:nth-child(2){animation-delay:.06s}
+  .slide.active .stagger:nth-child(3){animation-delay:.12s}
+  .slide.active .stagger:nth-child(4){animation-delay:.18s}
+  .slide.active .stagger:nth-child(5){animation-delay:.24s}
+  .slide.active .stagger:nth-child(6){animation-delay:.30s}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .eyebrow{font-family:var(--disp);font-weight:700;font-size:clamp(.62rem,1vw,.8rem);
+    letter-spacing:.34em;text-transform:uppercase;color:var(--violet-2);margin-bottom:1.5em}
+  h1{font-family:var(--disp);font-weight:900;line-height:1.02;letter-spacing:-.01em;
+    font-size:clamp(2.4rem,7.4vw,6.6rem)}
+  h2{font-family:var(--disp);font-weight:800;line-height:1.06;letter-spacing:-.01em;
+    font-size:clamp(1.7rem,4.4vw,3.7rem);max-width:22ch}
+  .lead{font-family:var(--disp);font-weight:500;line-height:1.28;
+    font-size:clamp(1.15rem,2.5vw,2.15rem);max-width:26ch;color:var(--ink)}
+  p{font-weight:300;line-height:1.62;font-size:clamp(.92rem,1.25vw,1.14rem);color:var(--dim);max-width:60ch}
+  p strong{color:var(--ink);font-weight:500}
+  .accentword{color:var(--violet-2)}
+
+  .rule{height:1px;background:var(--line);border:0;margin:1.6em 0}
+  .grid{display:grid;gap:clamp(14px,1.6vw,24px)}
+  .mt{margin-top:clamp(20px,3vh,44px)}
+  .mt-s{margin-top:clamp(12px,1.6vh,20px)}
+
+  /* stat tiles */
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat{border:1px solid var(--line);border-radius:14px;padding:clamp(16px,1.6vw,26px);
+    background:linear-gradient(160deg,rgba(143,138,230,.08),rgba(143,138,230,0))}
+  .stat .n{font-family:var(--disp);font-weight:800;font-size:clamp(1.5rem,3.2vw,2.9rem);
+    line-height:1;letter-spacing:-.02em}
+  .stat .l{margin-top:.6em;font-size:clamp(.66rem,.92vw,.82rem);color:var(--dim);line-height:1.4}
+  .stat.v .n{color:var(--violet-2)} .stat.t .n{color:var(--teal)}
+  .stat.a .n{color:var(--amber)} .stat.r .n{color:var(--rose)}
+
+  /* module cards */
+  .cards{grid-template-columns:repeat(5,1fr)}
+  .card{border:1px solid var(--line);border-radius:14px;padding:clamp(14px,1.4vw,22px);
+    background:rgba(255,255,255,.02)}
+  .card .k{font-family:var(--disp);font-weight:700;font-size:clamp(.62rem,.8vw,.72rem);
+    letter-spacing:.06em;color:var(--faint)}
+  .card .h{font-family:var(--disp);font-weight:800;font-size:clamp(1rem,1.5vw,1.35rem);margin:.5em 0 .35em}
+  .card p{font-size:clamp(.72rem,.92vw,.86rem);line-height:1.45}
+
+  /* trilogy / timeline */
+  .trilogy{grid-template-columns:repeat(3,1fr)}
+  .leg{border-top:2px solid var(--line);padding-top:1.1em;position:relative}
+  .leg::before{content:'';position:absolute;top:-7px;left:0;width:12px;height:12px;border-radius:50%;
+    background:var(--violet-2)}
+  .leg:nth-child(2)::before{background:var(--amber)} .leg:nth-child(3)::before{background:var(--teal)}
+  .leg .yr{font-family:var(--disp);font-weight:800;font-size:clamp(1.3rem,2.4vw,2rem)}
+  .leg .nm{font-family:var(--disp);font-weight:700;letter-spacing:.02em;margin:.15em 0 .5em;color:var(--violet-2)}
+  .leg:nth-child(2) .nm{color:var(--amber)} .leg:nth-child(3) .nm{color:var(--teal)}
+  .leg p{font-size:clamp(.74rem,.95vw,.9rem)}
+
+  /* bars (financials) */
+  .bars{display:flex;align-items:flex-end;gap:clamp(14px,2.4vw,40px);height:clamp(180px,34vh,320px);
+    margin-top:clamp(18px,3vh,36px)}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
+  .bar .col{width:100%;max-width:120px;border-radius:8px 8px 0 0;
+    background:linear-gradient(180deg,var(--violet-2),rgba(143,138,230,.25));
+    transform:scaleY(0);transform-origin:bottom;transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+  .slide.active .bar .col{transform:scaleY(1)}
+  .bar:nth-child(1) .col{transition-delay:.1s} .bar:nth-child(2) .col{transition-delay:.22s}
+  .bar:nth-child(3) .col{transition-delay:.34s} .bar:nth-child(4) .col{transition-delay:.46s}
+  .bar:nth-child(5) .col{transition-delay:.58s}
+  .bar .v{font-family:var(--disp);font-weight:800;font-size:clamp(.85rem,1.5vw,1.35rem);margin-bottom:.5em}
+  .bar .yr{margin-top:.7em;font-size:clamp(.66rem,.9vw,.8rem);color:var(--dim)}
+
+  /* two-column */
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,80px);align-items:center}
+  .list{list-style:none}
+  .list li{padding:.7em 0;border-bottom:1px solid var(--line);display:flex;gap:1em;
+    font-size:clamp(.85rem,1.1vw,1.05rem)}
+  .list li b{font-family:var(--disp);font-weight:700;color:var(--ink);min-width:8.5ch}
+  .list li span{color:var(--dim)}
+
+  /* team */
+  .roster{grid-template-columns:repeat(4,1fr)}
+  .person .nm{font-family:var(--disp);font-weight:700;font-size:clamp(.9rem,1.2vw,1.08rem)}
+  .person .rl{font-size:clamp(.66rem,.85vw,.78rem);color:var(--dim);margin-top:.25em;line-height:1.4}
+  .subhead{font-family:var(--disp);font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    font-size:clamp(.66rem,.9vw,.78rem);color:var(--faint);margin:0 0 1em}
+
+  /* cover + closing centered */
+  .center{align-items:center;text-align:center}
+  .center h1{max-width:16ch}
+  .cover-sub{margin-top:1.6em;font-family:var(--disp);font-weight:500;letter-spacing:.02em;
+    font-size:clamp(1rem,2vw,1.5rem);color:var(--dim);max-width:30ch}
+  .cover-stats{display:flex;gap:clamp(24px,4vw,64px);margin-top:clamp(28px,5vh,56px);flex-wrap:wrap;justify-content:center}
+  .cover-stats div{font-size:clamp(.72rem,1vw,.9rem);color:var(--dim);letter-spacing:.04em}
+  .cover-stats b{display:block;font-family:var(--disp);font-weight:800;color:var(--ink);
+    font-size:clamp(1.2rem,2.4vw,2rem);margin-bottom:.15em}
+  .ask-big{font-family:var(--disp);font-weight:900;font-size:clamp(4rem,15vw,13rem);line-height:.9;
+    letter-spacing:-.03em;background:linear-gradient(180deg,#fff,var(--violet-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* fixed chrome */
+  .brand{position:fixed;top:var(--edge);left:var(--edge);z-index:6;display:flex;align-items:center;gap:12px;pointer-events:none}
+  .brand img{height:26px;width:auto;opacity:.95}
+  .foot{position:fixed;bottom:clamp(22px,4vh,40px);left:var(--edge);right:var(--edge);z-index:6;
+    display:flex;justify-content:space-between;align-items:center;pointer-events:none;
+    font-family:var(--disp);font-weight:500;font-size:clamp(.58rem,.75vw,.68rem);letter-spacing:.28em;
+    text-transform:uppercase;color:var(--faint)}
+  #dots{position:fixed;bottom:clamp(14px,2.4vh,22px);left:50%;transform:translateX(-50%);z-index:7;
+    display:flex;gap:9px;max-width:80vw;flex-wrap:wrap;justify-content:center;pointer-events:auto}
+  #dots button{width:7px;height:7px;border-radius:50%;border:0;padding:0;cursor:pointer;
+    background:rgba(244,244,248,.24);transition:.3s}
+  #dots button.on{background:var(--violet-2);transform:scale(1.5)}
+  #prog{position:fixed;top:0;left:0;height:2px;z-index:8;background:var(--violet-2);
+    width:0;transition:width .5s cubic-bezier(.22,.61,.36,1)}
+  .arrows{position:fixed;bottom:clamp(20px,4vh,38px);right:var(--edge);z-index:7;display:flex;gap:10px}
+  .arrows button{width:38px;height:34px;border:1px solid var(--line);background:rgba(255,255,255,.03);
+    color:var(--ink);border-radius:9px;cursor:pointer;font-size:15px;transition:.15s}
+  .arrows button:hover{background:rgba(255,255,255,.1);border-color:rgba(244,244,248,.4)}
+
+  /* video slide */
+  .videowrap{position:relative;width:min(1000px,84vw);aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+    border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55);background:#000;
+    margin-top:clamp(18px,3vh,32px)}
+  .videowrap video{width:100%;height:100%;object-fit:cover;display:block}
+  .playbtn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(5,5,10,.34);border:0;cursor:pointer;transition:.2s}
+  .playbtn:hover{background:rgba(5,5,10,.18)}
+  .playbtn.gone{display:none}
+  .playbtn span{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.94);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+  .playbtn span::after{content:'';margin-left:6px;border-style:solid;border-width:14px 0 14px 24px;
+    border-color:transparent transparent transparent #05050a}
+
+  /* email gate */
+  #gate{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+    background:#000;padding:24px}
+  #gate.hide{display:none}
+  #gate .card2{width:min(430px,92vw);background:#0d0d10;border-radius:16px;padding:40px 34px;text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1)}
+  #gate img{height:34px;width:auto;display:block;margin:0 auto 16px}
+  #gate .gsub{color:rgba(255,255,255,.5);font-family:var(--disp);font-weight:600;font-size:11px;
+    letter-spacing:.3em;text-transform:uppercase;margin-bottom:22px}
+  #gate h3{font-family:var(--disp);font-weight:700;font-size:19px;margin-bottom:6px}
+  #gate .p2{color:rgba(255,255,255,.6);font-size:14px;line-height:1.5;margin-bottom:20px}
+  #gate form{display:flex;flex-direction:column;gap:11px}
+  #gate input{width:100%;padding:13px 15px;border-radius:9px;border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.06);color:#fff;font-size:15px;outline:none}
+  #gate input:focus{border-color:rgba(255,255,255,.55)}
+  #gate input::placeholder{color:rgba(255,255,255,.4)}
+  #gate button{width:100%;padding:13px;border-radius:9px;border:0;cursor:pointer;background:#fff;color:#000;
+    font-family:var(--disp);font-size:15px;font-weight:700;transition:opacity .15s}
+  #gate button:hover{opacity:.85}
+  #gate .err{color:#ff6b6b;font-size:13px;min-height:16px;text-align:left}
+  #gate .fine{color:rgba(255,255,255,.35);font-size:11px;margin-top:16px;line-height:1.5}
+
+  #hint{position:fixed;bottom:calc(clamp(14px,2.4vh,22px) + 26px);left:50%;transform:translateX(-50%);
+    z-index:7;font-size:11px;color:var(--faint);letter-spacing:.05em;transition:opacity .6s}
+
+  @media (max-width:820px){
+    .stats,.cards,.roster{grid-template-columns:repeat(2,1fr)}
+    .trilogy{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr;gap:24px}
+    .slide{justify-content:flex-start;overflow-y:auto}
+    .arrows{display:none}
+    h2{max-width:none} .lead{max-width:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .slide,.slide.active .stagger,.bar .col{transition:opacity .2s;animation:none;transform:none}
+    .bar .col{transform:scaleY(1)}
+  }
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+
+<div class="brand"><img src="imxp-logo.png" alt="IMXP" /></div>
+<div id="prog"></div>
+
+<div id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide center active">
+    <div class="stagger eyebrow">Investment Overview · 2026</div>
+    <h1 class="stagger">The operating system for the experiential age</h1>
+    <div class="stagger cover-sub">IMXP builds the marquee gatherings of our time, and the platform that will run them all.</div>
+    <div class="stagger cover-stats">
+      <div><b>$4.2M</b>revenue · last 10 months</div>
+      <div><b>50K+</b>community · 70+ countries</div>
+      <div><b>Sold out</b>Iceland Eclipse 2026</div>
+    </div>
+  </section>
+
+  <!-- 2 · THESIS -->
+  <section class="slide">
+    <div class="stagger eyebrow">The Thesis</div>
+    <h2 class="stagger">Real-world experience is the scarcest thing we have left, and demand is exploding.</h2>
+    <p class="stagger mt">The experience economy already exceeds <strong>$100B and grows 8% a year</strong>. Eighty percent of millennials and younger choose experiences over possessions. Yet the coordination layer underneath the world's most significant gatherings, the identity, trust, and participation rails, does not exist yet. We are building it.</p>
+  </section>
+
+  <!-- 3 · WHAT WE DO -->
+  <section class="slide">
+    <div class="stagger eyebrow">What We Do</div>
+    <h2 class="stagger">We run revenue-generating events as a live R&amp;D lab for a platform.</h2>
+    <p class="stagger mt">Every gathering we produce captures data, tests tooling, and hardens the systems that will let anyone deploy a world-class experience. The events fund the platform. The platform compounds the margin. <strong>One flywheel, two businesses.</strong></p>
+  </section>
+
+  <!-- 4 · TRACTION -->
+  <section class="slide">
+    <div class="stagger eyebrow">Traction</div>
+    <h2 class="stagger">A sold-out proof of demand.</h2>
+    <div class="stagger grid stats mt">
+      <div class="stat v"><div class="n">$4.19M</div><div class="l">Iceland combined revenue, festival + The Portal</div></div>
+      <div class="stat t"><div class="n">2,600</div><div class="l">Participants across 60+ countries</div></div>
+      <div class="stat a"><div class="n">287</div><div class="l">Artists &amp; speakers on the bill</div></div>
+      <div class="stat r"><div class="n">109</div><div class="l">Confirmed on-platform from 831 applicants</div></div>
+    </div>
+    <p class="stagger mt-s">Before Iceland: Texas Eclipse 2024, 38,000 attendees from 40+ countries, $20M+ gross from a four-day event.</p>
+  </section>
+
+  <!-- 5 · PROOF -->
+  <section class="slide">
+    <div class="stagger eyebrow">Proof · Iceland Eclipse 2026</div>
+    <h2 class="stagger">We said we would deliver the marquee gathering of the year. <span class="accentword">We did.</span></h2>
+    <div class="stagger split mt">
+      <p>A five-day immersive gathering on the Snaefellsnes Peninsula at the intersection of space, music, exploration, and wellness, alongside The Portal, a month-long field lab for cultural evolution. United Nations, NASA, OpenAI, MAPS, and Playing for Change were in the room.</p>
+      <ul class="list">
+        <li><b>$3.67M</b><span>Festival revenue</span></li>
+        <li><b>$512K</b><span>The Portal, on the IMXP platform</span></li>
+        <li><b>Sold out</b><span>Every pass, months ahead</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 6 · PRODUCT -->
+  <section class="slide">
+    <div class="stagger eyebrow">The Product · IMXP Operating System</div>
+    <h2 class="stagger">A participation-native substrate for live events, communities, and cities.</h2>
+    <div class="stagger grid cards mt">
+      <div class="card"><div class="k">01</div><div class="h">Participation Layer</div><p>Volunteer, ritual, and contribution events.</p></div>
+      <div class="card"><div class="k">02</div><div class="h">Unified Profile</div><p>Identity, behavior, and reputation that travel.</p></div>
+      <div class="card"><div class="k">03</div><div class="h">Reputation Graph</div><p>Trust scores and role progression.</p></div>
+      <div class="card"><div class="k">04</div><div class="h">Agent Crew</div><p>Programmable AI production workflows.</p></div>
+      <div class="card"><div class="k">05</div><div class="h">Portal</div><p>Member-facing surface, deep personalization.</p></div>
+    </div>
+    <p class="stagger mt-s"><strong>Festival-in-a-Box</strong> packages the stack as <strong>Experience as a Service</strong>, turning one production team into a repeatable, sellable engine.</p>
+  </section>
+
+  <!-- 7 · VIDEO -->
+  <section class="slide center" id="videoSlide">
+    <div class="stagger eyebrow">Festival in a Box · Technology Demo</div>
+    <h2 class="stagger" style="max-width:none;text-align:center">AI-enabled festival production, live.</h2>
+    <div class="stagger videowrap">
+      <video id="fiab" src="media/fiab.mp4" poster="media/fiab-poster.png" playsinline preload="metadata"></video>
+      <button class="playbtn" id="playbtn" aria-label="Play demo"><span></span></button>
+    </div>
+  </section>
+
+  <!-- 8 · ROADMAP -->
+  <section class="slide">
+    <div class="stagger eyebrow">The Eclipse Trilogy</div>
+    <h2 class="stagger">Three total-solar-eclipse gatherings. The only window like this until 2044.</h2>
+    <div class="stagger grid trilogy mt">
+      <div class="leg"><div class="yr">2026</div><div class="nm">Iceland</div><p>Snaefellsnes Peninsula. Delivered and sold out. The proof.</p></div>
+      <div class="leg"><div class="yr">2027</div><div class="nm">Egypt</div><p>A journey down the Nile from Luxor to the pyramids at Giza. The longest totality of the century.</p></div>
+      <div class="leg"><div class="yr">2028</div><div class="nm">New Zealand</div><p>Midwinter totality in the Southern Alps at Queenstown. The bottom of the world.</p></div>
+    </div>
+    <p class="stagger mt-s">Each event is a container for co-creation, and a live test of the platform that runs the next one.</p>
+  </section>
+
+  <!-- 8 · MODEL -->
+  <section class="slide">
+    <div class="stagger eyebrow">The Model</div>
+    <h2 class="stagger">By 2028 we 10x revenue, with the majority of margin driven by the platform.</h2>
+    <div class="stagger bars">
+      <div class="bar"><div class="v">$4.2M</div><div class="col" style="height:9%"></div><div class="yr">2026 · actual</div></div>
+      <div class="bar"><div class="v">&nbsp;</div><div class="col" style="height:20%"></div><div class="yr">2027</div></div>
+      <div class="bar"><div class="v">~$42M</div><div class="col" style="height:44%"></div><div class="yr">2028 · 10x</div></div>
+      <div class="bar"><div class="v">&nbsp;</div><div class="col" style="height:72%"></div><div class="yr">2029</div></div>
+      <div class="bar"><div class="v">&nbsp;</div><div class="col" style="height:100%"></div><div class="yr">2030</div></div>
+    </div>
+    <p class="stagger mt-s" style="color:var(--faint);font-size:.8rem">Trajectory shown for illustration. 2026 revenue is actual; 2028 reflects the projected 10x. Forward-looking projections, full financial pro forma available on request.</p>
+  </section>
+
+  <!-- 9 · ASK -->
+  <section class="slide center">
+    <div class="stagger eyebrow">The Ask</div>
+    <div class="stagger ask-big">$1M</div>
+    <div class="stagger cover-sub">Seed round on a SAFE at a $10M cap. A priority discount for early movers, $50K minimum.</div>
+    <p class="stagger mt-s" style="color:var(--faint)">Following a $750K pre-seed in 2025. ~$350K already committed from prior investors. Capital expands the events network while we build out the platform.</p>
+  </section>
+
+  <!-- 10 · TEAM -->
+  <section class="slide">
+    <div class="stagger eyebrow">Team</div>
+    <h2 class="stagger">The crew that has done this before.</h2>
+    <div class="stagger grid roster mt">
+      <div class="person"><div class="nm">Mitch Morales</div><div class="rl">Founder &amp; CEO · creator of Texas Eclipse (38K)</div></div>
+      <div class="person"><div class="nm">MaryLiz Bender</div><div class="rl">CXO · Cosmic Perspective, Everyday Astronaut</div></div>
+      <div class="person"><div class="nm">Jon Shapiro</div><div class="rl">CTO · PlantWave, Mantle</div></div>
+      <div class="person"><div class="nm">Ari Eisenstat</div><div class="rl">Program Director · Space for Humanity</div></div>
+    </div>
+    <div class="stagger subhead" style="margin-top:2em">Investors &amp; Advisors</div>
+    <div class="stagger grid roster">
+      <div class="person"><div class="nm">Whitney Kroenke Silverstein</div><div class="rl">Playing for Change</div></div>
+      <div class="person"><div class="nm">JT Marino</div><div class="rl">Founder, angel investor</div></div>
+      <div class="person"><div class="nm">Chris Boshuizen</div><div class="rl">Interplanetary Capital · astronaut</div></div>
+      <div class="person"><div class="nm">Ravé Mehta</div><div class="rl">Flow Capital · author</div></div>
+    </div>
+  </section>
+
+  <!-- 11 · VISION -->
+  <section class="slide center">
+    <div class="stagger eyebrow">Vision</div>
+    <h1 class="stagger" style="font-size:clamp(2rem,5.4vw,4.6rem);max-width:20ch">We bring humans into alignment with themselves, our planet, and the cosmos.</h1>
+    <div class="stagger cover-sub">Building toward the day we watch a total solar eclipse from the Moon.</div>
+  </section>
+
+  <!-- 12 · CLOSE -->
+  <section class="slide center">
+    <div class="stagger eyebrow">Thank You</div>
+    <h2 class="stagger" style="max-width:none">Immersive experiences at global scale.</h2>
+    <div class="stagger cover-sub">Mitch Morales · <a href="mailto:mitch@im-xp.com" style="color:var(--violet-2);text-decoration:none">mitch@im-xp.com</a></div>
+    <div class="stagger" style="margin-top:1.2em;color:var(--faint);font-size:.8rem;letter-spacing:.04em">Data room available on request.</div>
+  </section>
+
+</div>
+
+<div class="foot"><span>IMXP · Immersive Experiences</span><span id="foot-n">01 / 12</span></div>
+<div id="hint">Use arrow keys, swipe, or the dots to navigate</div>
+<div id="dots"></div>
+<div class="arrows"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
+
+<!-- email gate -->
+<div id="gate">
+  <div class="card2">
+    <img src="imxp-logo.png" alt="IMXP" />
+    <div class="gsub">Investment Overview</div>
+    <h3>View the deck</h3>
+    <div class="p2">Enter your email to continue.</div>
+    <form id="gateForm" novalidate>
+      <input id="gateEmail" type="email" placeholder="you@company.com" autocomplete="email" />
+      <div class="err" id="gateErr"></div>
+      <button type="submit">View deck →</button>
+    </form>
+    <div class="fine">Demo only · nothing is sent or saved to a server.</div>
+  </div>
+</div>
+
+<script>
+/* ---------------- deck nav ---------------- */
+const slides=[...document.querySelectorAll('.slide')];
+const dots=document.getElementById('dots');
+const prog=document.getElementById('prog');
+const footN=document.getElementById('foot-n');
+const hint=document.getElementById('hint');
+const pad=n=>(n<10?'0':'')+n;
+let i=0;
+slides.forEach((_,n)=>{const b=document.createElement('button');b.setAttribute('aria-label','Slide '+(n+1));
+  b.onclick=()=>go(n);dots.appendChild(b);});
+const vid=document.getElementById('fiab');
+function go(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  prog.style.width=((i)/(slides.length-1)*100)+'%';
+  footN.textContent=pad(i+1)+' / '+pad(slides.length);
+  if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
+  if(vid && !slides[i].contains(vid)) vid.pause();   // pause demo when navigating away
+}
+/* video demo: click to play with sound, then native controls */
+(function(){
+  const pb=document.getElementById('playbtn');
+  if(!pb||!vid)return;
+  pb.addEventListener('click',()=>{vid.controls=true;pb.classList.add('gone');vid.play();});
+  vid.addEventListener('pause',()=>{if(vid.currentTime===0){pb.classList.remove('gone');vid.controls=false;}});
+})();
+const next=()=>go(i+1), prev=()=>go(i-1);
+document.getElementById('next').onclick=next;
+document.getElementById('prev').onclick=prev;
+addEventListener('keydown',e=>{
+  if(['ArrowRight','PageDown',' '].includes(e.key)){next();e.preventDefault();}
+  if(['ArrowLeft','PageUp'].includes(e.key)){prev();e.preventDefault();}
+  if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
+});
+let sx=0,sy=0,st=0;
+addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;st=Date.now();},{passive:true});
+addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)){dx<0?next():prev();}},{passive:true});
+let wl=0;
+addEventListener('wheel',e=>{const t=Date.now();if(t-wl<720)return;
+  if(Math.abs(e.deltaY)>28||Math.abs(e.deltaX)>28){wl=t;(e.deltaY+e.deltaX)>0?next():prev();}},{passive:true});
+const start=parseInt((location.hash||'').replace('#',''),10);
+go(start>=1&&start<=slides.length?start-1:0);
+setTimeout(()=>hint.style.opacity='0',4600);
+
+/* ---------------- canvas backdrop: starfield + breathing eclipse ---------------- */
+const cv=document.getElementById('sky'),ctx=cv.getContext('2d');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let stars=[],DPR=1,cw=0,ch=0;
+function resize(){
+  DPR=Math.min(devicePixelRatio||1,2);
+  cw=innerWidth;ch=innerHeight;
+  cv.width=cw*DPR;cv.height=ch*DPR;cv.style.width=cw+'px';cv.style.height=ch+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  const count=Math.min(260,Math.round(cw*ch/9000));
+  stars=Array.from({length:count},()=>({
+    x:Math.random()*cw,y:Math.random()*ch,r:Math.random()*1.3+.2,
+    a:Math.random()*.5+.2,tw:Math.random()*Math.PI*2,sp:Math.random()*.6+.2
+  }));
+}
+addEventListener('resize',resize);resize();
+
+function eclipse(cx,cy,rad,t){
+  // corona halo
+  const g=ctx.createRadialGradient(cx,cy,rad*.72,cx,cy,rad*2.4);
+  g.addColorStop(0,'rgba(143,138,230,0)');
+  g.addColorStop(.32,'rgba(143,138,230,'+(.20+.05*Math.sin(t*.7))+')');
+  g.addColorStop(.55,'rgba(120,110,210,.06)');
+  g.addColorStop(1,'rgba(120,110,210,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,cw,ch);
+  // rim light
+  const rg=ctx.createRadialGradient(cx,cy,rad*.9,cx,cy,rad*1.14);
+  rg.addColorStop(0,'rgba(0,0,0,0)');
+  rg.addColorStop(.78,'rgba(179,174,242,'+(.5+.12*Math.sin(t*.9))+')');
+  rg.addColorStop(.9,'rgba(255,255,255,.06)');
+  rg.addColorStop(1,'rgba(179,174,242,0)');
+  ctx.fillStyle=rg;ctx.beginPath();ctx.arc(cx,cy,rad*1.14,0,7);ctx.fill();
+  // disk
+  ctx.fillStyle='#05050a';ctx.beginPath();ctx.arc(cx,cy,rad,0,7);ctx.fill();
+}
+let t0=performance.now();
+function frame(now){
+  const t=(now-t0)/1000;
+  ctx.clearRect(0,0,cw,ch);
+  ctx.fillStyle='#05050a';ctx.fillRect(0,0,cw,ch);
+  // stars
+  for(const s of stars){
+    const tw=reduce?s.a:s.a*(.6+.4*Math.sin(s.tw+t*s.sp));
+    ctx.globalAlpha=tw;ctx.fillStyle='#dfe0f5';
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();
+  }
+  ctx.globalAlpha=1;
+  // eclipse anchored upper-right, gently drifting
+  const cx=cw*(0.80)+ (reduce?0:Math.sin(t*.15)*8);
+  const cy=ch*(0.30)+ (reduce?0:Math.cos(t*.12)*8);
+  const rad=Math.min(cw,ch)*0.26;
+  eclipse(cx,cy,rad,reduce?0:t);
+  if(!reduce)requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+if(reduce){/* draw one static frame */requestAnimationFrame(frame);}
+
+/* ---------------- email gate ---------------- */
+(function(){
+  const KEY='imxp_demo_unlocked';
+  const gate=document.getElementById('gate');
+  if(localStorage.getItem(KEY)){gate.classList.add('hide');return;}
+  const form=document.getElementById('gateForm'),email=document.getElementById('gateEmail'),err=document.getElementById('gateErr');
+  const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  form.addEventListener('submit',e=>{e.preventDefault();
+    const v=email.value.trim();
+    if(!re.test(v)){err.textContent='Please enter a valid email address.';email.focus();return;}
+    try{localStorage.setItem(KEY,'1');}catch(_){}
+    gate.classList.add('hide');
+  });
+  email.focus();
+})();
+</script>
+</body>
+</html>
