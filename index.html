@@ -230,8 +230,6 @@
   #dots button{width:7px;height:7px;border-radius:50%;border:0;padding:0;cursor:pointer;
     background:rgba(128,128,140,.4);transition:.3s}
   #dots button.on{background:var(--lav);transform:scale(1.55)}
-  #prog{position:absolute;top:0;left:0;height:3px;z-index:20;background:var(--lav);width:0;
-    transition:width .5s cubic-bezier(.22,.61,.36,1)}
   #ctr{display:none;position:fixed;bottom:clamp(20px,3.6vh,38px);left:var(--edge);z-index:9;
     font-family:var(--disp);font-weight:600;font-size:clamp(.62rem,.8vw,.72rem);letter-spacing:.22em;color:#9a9aa6}
   .arrows{display:none}
@@ -284,7 +282,6 @@
 </head>
 <body>
 <div id="frame"><div id="stage">
-<div id="prog"></div>
 <div id="deck">
 
   <!-- 1 · COVER -->
@@ -569,7 +566,6 @@
 <script>
 const slides=[...document.querySelectorAll('.slide')];
 const dots=document.getElementById('dots');
-const prog=document.getElementById('prog');
 const ctr=document.getElementById('ctr');
 const vid=document.getElementById('fiab');
 const pad=n=>(n<10?'0':'')+n;
@@ -580,7 +576,6 @@ function go(n){
   i=Math.max(0,Math.min(slides.length-1,n));
   slides.forEach((s,k)=>s.classList.toggle('active',k===i));
   [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
-  prog.style.width=(i/(slides.length-1)*100)+'%';
   ctr.textContent=pad(i+1)+' / '+pad(slides.length);
   if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
   if(vid && !slides[i].contains(vid)) vid.pause();
