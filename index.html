@@ -138,6 +138,21 @@
   .leg p{font-size:clamp(.74rem,.98cqw,.92rem)}
   .horizon{display:flex;align-items:center;gap:clamp(9px,1.4cqw,18px);flex-wrap:wrap}
   .horizon .hyr{font-family:var(--disp);font-weight:900;font-size:clamp(1rem,1.9cqw,1.6rem);color:#fff}
+  /* event timeline calendar */
+  .caltl{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,1.6cqw,26px);margin-top:clamp(16px,2.6cqh,30px)}
+  .ychev{font-family:var(--disp);font-weight:900;color:var(--ink);text-align:center;
+    font-size:clamp(1rem,1.8cqw,1.55rem);padding:clamp(6px,1cqh,11px) 0;margin-bottom:clamp(10px,1.6cqh,18px);
+    clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+  .ychev.teal{background:var(--teal)} .ychev.yellow{background:var(--yellow)}
+  .ychev.lav{background:var(--lav)} .ychev.navy{background:var(--navy);color:#fff}
+  .evt{padding:clamp(5px,.9cqh,9px) 0;border-bottom:1px solid var(--line-l)}
+  .evt .mo{display:block;font-family:var(--disp);font-weight:700;font-size:clamp(.56rem,.8cqw,.7rem);
+    letter-spacing:.14em;text-transform:uppercase}
+  .caltl .c26 .mo{color:#1aa39c} .caltl .c27 .mo{color:#c79400}
+  .caltl .c28 .mo{color:#6f66c9}
+  .evt .en{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(.72rem,1.05cqw,.98rem);color:var(--ink);margin:.12em 0}
+  .evt .lo{display:block;font-size:clamp(.6rem,.85cqw,.76rem);color:var(--dim-l);line-height:1.35}
+  .calnote{font-size:clamp(.68rem,.98cqw,.9rem);color:var(--dim-l);line-height:1.5}
 
   /* financial bars */
   .bars{display:flex;align-items:flex-end;gap:clamp(16px,3cqw,52px);height:clamp(160px,30cqh,300px);
@@ -534,6 +549,41 @@
       <div class="pill teal">South Africa Eclipse</div>
       <div class="pill yellow">Apophis</div>
       <div class="pill lav">Antarctic Expedition</div>
+    </div>
+    <div class="fd">Fundraise Deck</div>
+  </section>
+
+  <!-- 12b · EVENT TIMELINE -->
+  <section class="slide light">
+    <div class="chip">Event Timeline</div>
+    <div class="logo"><img src="imxp-logo.png" alt="" /></div>
+    <h2 class="st" style="font-size:clamp(1.3rem,2.7cqw,2.4rem)">IMXP new event timeline</h2>
+    <div class="st caltl">
+      <div class="c26">
+        <div class="ychev teal">2026</div>
+        <div class="evt"><span class="mo">January</span><span class="en">Ripple on the Nile</span><span class="lo">Egypt · Community Trip</span></div>
+        <div class="evt"><span class="mo">March</span><span class="en">World Peace Machine</span><span class="lo">Austin, Texas · Health &amp; Wellness Summit</span></div>
+        <div class="evt"><span class="mo">July - August</span><span class="en">Iceland Eclipse</span><span class="lo">Snaefellsnes Peninsula · Experiential Festival</span></div>
+        <div class="evt"><span class="mo">November</span><span class="en">Atomika</span><span class="lo">Roswell, New Mexico · Alternate Reality Gathering</span></div>
+      </div>
+      <div class="c27">
+        <div class="ychev yellow">2027</div>
+        <div class="evt"><span class="mo">April</span><span class="en">EarthShip</span><span class="lo">Japan · Transformation at Sea</span></div>
+        <div class="evt"><span class="mo">June</span><span class="en">Secret Solstice</span><span class="lo">Iceland · Experiential Festival</span></div>
+        <div class="evt"><span class="mo">August</span><span class="en">Egypt Eclipse</span><span class="lo">Nile River · Boutique Festival</span></div>
+        <div class="evt"><span class="mo">October</span><span class="en">California Space Conference</span><span class="lo">Los Angeles</span></div>
+      </div>
+      <div class="c28">
+        <div class="ychev lav">2028</div>
+        <div class="evt"><span class="mo">January</span><span class="en">Antarctic Entities</span><span class="lo">Antarctica · Destination Gathering</span></div>
+        <div class="evt"><span class="mo">July</span><span class="en">New Zealand Eclipse</span><span class="lo">New Zealand · Experiential Event</span></div>
+        <div class="evt"><span class="mo">November</span><span class="en">IMXP City</span><span class="lo">South Africa · Future of Cities</span></div>
+        <div class="evt"><span class="mo">December</span><span class="en">Arctic Aurora</span><span class="lo">Iceland · Experiential Event</span></div>
+      </div>
+      <div class="c29">
+        <div class="ychev navy">2029-2030</div>
+        <p class="calnote">Continuing global expansion with new events across Texas, Florida, and international markets, including the two unique celestial events on the African continent.</p>
+      </div>
     </div>
     <div class="fd">Fundraise Deck</div>
   </section>
