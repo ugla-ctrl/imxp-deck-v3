@@ -153,6 +153,20 @@
   .evt .en{display:block;font-family:var(--disp);font-weight:800;font-size:clamp(.72rem,1.05cqw,.98rem);color:var(--ink);margin:.12em 0}
   .evt .lo{display:block;font-size:clamp(.6rem,.85cqw,.76rem);color:var(--dim-l);line-height:1.35}
   .calnote{font-size:clamp(.68rem,.98cqw,.9rem);color:var(--dim-l);line-height:1.5}
+  /* upcoming events cards (imxp.org style, compact) */
+  .evgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,1.8cqw,26px);margin-top:clamp(16px,2.6cqh,32px)}
+  .evcard .thumb{aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#0b0b0f;
+    box-shadow:0 10px 30px rgba(0,0,0,.18)}
+  .evcard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .evcard .en{font-family:var(--disp);font-weight:800;font-size:clamp(.82rem,1.25cqw,1.15rem);
+    color:var(--ink);margin:.75em 0 .35em}
+  .evcard .dt{font-family:var(--disp);font-weight:700;font-size:clamp(.56rem,.8cqw,.72rem);
+    letter-spacing:.1em;text-transform:uppercase}
+  .evgrid .e1 .dt{color:#c79400} .evgrid .e2 .dt{color:#1aa39c}
+  .evgrid .e3 .dt{color:#8a5a2b} .evgrid .e4 .dt{color:#6f66c9}
+  .evcard .lo{font-family:var(--disp);font-weight:600;font-size:clamp(.54rem,.76cqw,.68rem);
+    letter-spacing:.1em;text-transform:uppercase;color:var(--dim-l);margin-top:.25em}
+  @container (max-width:820px){ .evgrid{grid-template-columns:repeat(2,1fr)} }
 
   /* financial bars */
   .bars{display:flex;align-items:flex-end;gap:clamp(16px,3cqw,52px);height:clamp(160px,30cqh,300px);
@@ -553,38 +567,38 @@
     <div class="fd">Fundraise Deck</div>
   </section>
 
-  <!-- 12b · EVENT TIMELINE -->
+  <!-- 12b · UPCOMING EVENTS -->
   <section class="slide light">
-    <div class="chip">Event Timeline</div>
+    <div class="chip">Upcoming Events</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st" style="font-size:clamp(1.3rem,2.7cqw,2.4rem)">IMXP new event timeline</h2>
-    <div class="st caltl">
-      <div class="c26">
-        <div class="ychev teal">2026</div>
-        <div class="evt"><span class="mo">January</span><span class="en">Ripple on the Nile</span><span class="lo">Egypt · Community Trip</span></div>
-        <div class="evt"><span class="mo">March</span><span class="en">World Peace Machine</span><span class="lo">Austin, Texas · Health &amp; Wellness Summit</span></div>
-        <div class="evt"><span class="mo">July - August</span><span class="en">Iceland Eclipse</span><span class="lo">Snaefellsnes Peninsula · Experiential Festival</span></div>
-        <div class="evt"><span class="mo">November</span><span class="en">Atomika</span><span class="lo">Roswell, New Mexico · Alternate Reality Gathering</span></div>
+    <h2 class="st" style="font-size:clamp(1.3rem,2.7cqw,2.4rem)">Our forward slate, 2027 and beyond</h2>
+    <div class="st evgrid">
+      <div class="evcard e1">
+        <div class="thumb"><img src="media/events/coherence.jpg" alt="Coherence" /></div>
+        <div class="en">Coherence</div>
+        <div class="dt">March 19-22, 2027</div>
+        <div class="lo">Texas Hill Country</div>
       </div>
-      <div class="c27">
-        <div class="ychev yellow">2027</div>
-        <div class="evt"><span class="mo">April</span><span class="en">EarthShip</span><span class="lo">Japan · Transformation at Sea</span></div>
-        <div class="evt"><span class="mo">June</span><span class="en">Secret Solstice</span><span class="lo">Iceland · Experiential Festival</span></div>
-        <div class="evt"><span class="mo">August</span><span class="en">Egypt Eclipse</span><span class="lo">Nile River · Boutique Festival</span></div>
-        <div class="evt"><span class="mo">October</span><span class="en">California Space Conference</span><span class="lo">Los Angeles</span></div>
+      <div class="evcard e2">
+        <div class="thumb"><img src="media/events/midnight.jpg" alt="Midnight Sun Festival" /></div>
+        <div class="en">Midnight Sun Festival</div>
+        <div class="dt">9-11 July 2027</div>
+        <div class="lo">Reykjavik, Iceland</div>
       </div>
-      <div class="c28">
-        <div class="ychev lav">2028</div>
-        <div class="evt"><span class="mo">January</span><span class="en">Antarctic Entities</span><span class="lo">Antarctica · Destination Gathering</span></div>
-        <div class="evt"><span class="mo">July</span><span class="en">New Zealand Eclipse</span><span class="lo">New Zealand · Experiential Event</span></div>
-        <div class="evt"><span class="mo">November</span><span class="en">IMXP City</span><span class="lo">South Africa · Future of Cities</span></div>
-        <div class="evt"><span class="mo">December</span><span class="en">Arctic Aurora</span><span class="lo">Iceland · Experiential Event</span></div>
+      <div class="evcard e3">
+        <div class="thumb"><img src="media/events/egypt.jpg" alt="Egypt Eclipse" /></div>
+        <div class="en">Egypt Eclipse</div>
+        <div class="dt">30 July - 9 August 2027</div>
+        <div class="lo">Luxor &amp; Greater Egypt</div>
       </div>
-      <div class="c29">
-        <div class="ychev navy">2029-2030</div>
-        <p class="calnote">Continuing global expansion with new events across Texas, Florida, and international markets, including the two unique celestial events on the African continent.</p>
+      <div class="evcard e4">
+        <div class="thumb"><img src="media/events/australasia.jpg" alt="Australasia Eclipse" /></div>
+        <div class="en">Australasia Eclipse</div>
+        <div class="dt">July 2028</div>
+        <div class="lo">Location to be announced</div>
       </div>
     </div>
+    <p class="st calnote mt-s">Beyond 2028: South Africa Eclipse, Apophis, and the Antarctic Expedition (2029-30+), continuing IMXP's global expansion.</p>
     <div class="fd">Fundraise Deck</div>
   </section>
 
