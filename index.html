@@ -262,9 +262,23 @@
   .expanel img{height:clamp(60px,12cqh,118px);width:auto;max-width:100%;object-fit:contain;margin:0 auto}
 
   /* iceland eclipse badge on the events slide */
-  .eventbadge{position:absolute;top:clamp(58px,10.5cqh,116px);right:clamp(26px,4.6cqw,84px);z-index:3;
-    height:clamp(84px,15cqh,132px);width:auto}
-  @container (max-width:820px){ .eventbadge{height:76px} }
+  .eventbadge{position:absolute;top:clamp(34px,5.6cqh,62px);left:50%;transform:translateX(-50%);z-index:3;
+    height:clamp(64px,10.5cqh,96px);width:auto}
+  @container (max-width:820px){ .eventbadge{height:58px} }
+
+  /* glass cards over a photo (events slide) */
+  .gsplit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4cqw,36px)}
+  .gcard{background:rgba(10,10,14,.44);border:1px solid rgba(255,255,255,.15);border-radius:16px;
+    padding:clamp(13px,1.7cqw,26px) clamp(15px,1.9cqw,30px);backdrop-filter:blur(9px)}
+  .gk{font-family:var(--disp);font-weight:800;color:#fff;line-height:1.1;
+    font-size:clamp(.92rem,1.6cqw,1.4rem)}
+  .gd{font-family:var(--disp);font-weight:700;color:var(--teal);letter-spacing:.02em;
+    font-size:clamp(.58rem,.86cqw,.78rem);margin-top:.42em;text-transform:uppercase}
+  .gcard p{margin-top:.72em;max-width:none;font-size:clamp(.7rem,1cqw,.94rem);line-height:1.5}
+  .gcard .blist{margin-top:.7em}
+  .gcard .blist li{padding:.42em 0 .42em 1.3em;font-size:clamp(.68rem,.96cqw,.9rem)}
+  .gcard .blist li::before{top:.9em;width:8px;height:8px}
+  .gcard .blist li:last-child{border-bottom:0;padding-bottom:0}
 
   /* video */
   .videowrap{position:relative;width:min(960px,82cqw);aspect-ratio:16/9;border-radius:14px;overflow:hidden;
@@ -350,7 +364,6 @@
       <div>Organizers of<br/>The Eclipse Trilogy</div>
       <div>Contributors from<br/>75+ countries</div>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 2 · MISSION -->
@@ -360,7 +373,6 @@
     <div class="chip">Mission</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <div class="st statement">IMXP is building the operating system for the next generation of events</div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 3 · MARKET -->
@@ -376,7 +388,6 @@
       <div class="bignum yellow"><div class="n">$100B+</div><div class="l">the Experience Economy today, and growing</div></div>
       <div class="bignum lav"><div class="n">8%</div><div class="l">CAGR, with notable transactions incl. SXSW, Meow Wolf, and Illuminarium</div></div>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 4 · SOLUTION -->
@@ -393,30 +404,31 @@
         <div class="pill lav">People + systems aligned</div>
       </div>
     </div>
-    <div class="fd" style="color:#fff">Info Deck</div>
   </section>
 
   <!-- 5 · EVENTS · ICELAND -->
-  <section class="slide photo">
+  <section class="slide photo" style="padding-top:clamp(104px,18cqh,196px)">
     <div class="bg" style="background-image:url('media/photos/ceremony.jpg')"></div>
-    <div class="shade"></div>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.66),rgba(0,0,0,.44) 38%,rgba(0,0,0,.74))"></div>
     <div class="chip">Events</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <img class="st eventbadge" src="media/iceland-eclipse-logo.png" alt="Iceland Eclipse 11-15 August 2026" />
-    <h2 class="st" style="color:#fff;max-width:20ch">We launched the marquee global gathering of 2026</h2>
-    <div class="st split mt" style="align-items:start">
-      <div>
-        <p><strong>ICELAND ECLIPSE · Snaefellsnes Peninsula · 11 to 15 August 2026</strong><br/>
-        Five-day immersive experience where visionaries, artists, and seekers gather at the intersection of space, music, exploration, and wellness.</p>
+    <h2 class="st" style="color:#fff;max-width:24ch;margin:0 auto;text-align:center;font-size:clamp(1.3rem,2.9cqw,2.5rem)">We launched the marquee global gathering of 2026</h2>
+    <div class="st gsplit mt">
+      <div class="gcard">
+        <div class="gk">Iceland Eclipse</div>
+        <div class="gd">Snaefellsnes Peninsula &middot; 11 to 15 August 2026</div>
+        <p>Five-day immersive experience where visionaries, artists, and seekers gather at the intersection of space, music, exploration, and wellness.</p>
         <ul class="blist">
           <li>4,200 participants across five days</li>
           <li>Over 60 countries represented</li>
           <li>United Nations, NASA, OpenAI, MAPS, Playing for Change &amp; many more</li>
         </ul>
       </div>
-      <div>
-        <p><strong>THE PORTAL at Iceland Eclipse</strong><br/>
-        A month-long immersive pop-up village and field lab for cultural evolution, a catalyst for radical co-creation.</p>
+      <div class="gcard">
+        <div class="gk">The Portal</div>
+        <div class="gd">At Iceland Eclipse &middot; month-long</div>
+        <p>A month-long immersive pop-up village and field lab for cultural evolution, a catalyst for radical co-creation.</p>
         <ul class="blist">
           <li>571 applicants globally</li>
           <li>Launched Patron Program (3 confirmed)</li>
@@ -424,7 +436,6 @@
         </ul>
       </div>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 6 · UPCOMING EVENTS -->
@@ -465,7 +476,6 @@
       </div>
     </div>
     <p class="st calnote mt-s">Beyond 2028: South Africa Eclipse, Apophis, and the Antarctic Expedition (2029-30+), continuing IMXP's global expansion.</p>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 7 · ATOMIKA -->
@@ -484,7 +494,6 @@
         </div>
       </div>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 8 · PRODUCT / OS + DEVELOPMENT CALENDAR -->
@@ -517,7 +526,6 @@
       </div>
     </div>
     <div class="st imgpanel mt-s"><img src="media/people/os-shot.jpg" alt="IMXP Operating System, in build: Participation Layer, Unified Profile, Reputation Graph, Agent Crew, Portal" /></div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 9 · PRODUCT BUILD ROADMAP (GANTT) -->
@@ -526,7 +534,6 @@
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <h2 class="st" style="font-size:clamp(1.2rem,2.6cqw,2.3rem);max-width:none">Our operating system ships alongside the events that prove it</h2>
     <div class="st imgpanel mt" style="border:0;background:transparent"><img src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 10 · FIAB VIDEO DEMO -->
@@ -539,7 +546,6 @@
       <video id="fiab" src="media/fiab.mp4" poster="media/fiab-poster.png" playsinline preload="metadata"></video>
       <button class="playbtn" id="playbtn" aria-label="Play demo"><span></span></button>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 11 · WHY EXPERIENCES -->
@@ -555,7 +561,6 @@
       </div>
       <div class="imgpanel"><img src="media/photos/crowd-cheer.jpg" alt="Iceland Eclipse crowd" /></div>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 12 · VISION -->
@@ -566,7 +571,6 @@
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <div class="st statement">IMXP brings humans into alignment with themselves, our planet, and the Cosmos</div>
     <p class="st mt" style="max-width:none;font-family:var(--disp);font-weight:600;font-size:clamp(.95rem,1.7vw,1.4rem);color:#fff">We are building the systems to one day see a total solar eclipse from the Moon</p>
-    <div class="fd">Info Deck</div>
   </section>
 
   <!-- 13 · THANK YOU -->
@@ -579,7 +583,6 @@
     <div class="st mt-s" style="font-family:var(--disp);font-weight:600;font-size:clamp(.85rem,1.4vw,1.15rem)">
       Mitch Morales · <a href="mailto:mitch@im-xp.com" style="color:#fff;text-decoration:underline">mitch@im-xp.com</a>
     </div>
-    <div class="fd">Info Deck</div>
   </section>
 
 </div>
