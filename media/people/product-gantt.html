@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+  SOURCE for media/people/product-gantt.jpg (slide 8, Product Build Roadmap).
+
+  The chart used to be a flat JPG with no source, so date changes were impossible.
+  This file is now the source of truth. Edit here, then re-render with:
+
+    node scripts/render-gantt.js
+
+  Positioning: the timeline runs Aug '26 -> Aug '27 across four equal bands.
+  Use the --m<n> custom properties below, or the helper percentages:
+    Aug'26 0.0   Sep 8.3   Oct 16.7  | Nov 25.0  Dec 31.25  Jan 37.5  Feb 43.75
+    Mar'27 50.0  Apr 56.25 May 62.5  Jun 68.75  | Jul 75.0  Aug 87.5  end 100
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --teal:#8fe6e2; --green:#96eda1; --yellow:#ffd75e; --lav:#c3bdf2; --orange:#ffbe7d;
+    --ink:#0c0c0f; --grey:#7a7a86; --red:#c0392b;
+    --disp:'Archivo',Arial,sans-serif; --sans:'Inter',Arial,sans-serif;
+    --lab:200px;            /* left label column */
+    --rowh:58px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1800px;background:#fff;font-family:var(--sans);color:var(--ink);padding:18px 22px 22px}
+  .grid{position:relative}
+  .row{display:grid;grid-template-columns:var(--lab) 1fr;align-items:center;min-height:var(--rowh)}
+  .rlab{font-family:var(--disp);font-weight:800;font-size:21px;line-height:1.15}
+  .rlab small{display:block;font-family:var(--sans);font-weight:400;font-size:13px;color:var(--grey);margin-top:2px}
+  .track{position:relative;height:var(--rowh)}
+  .bar{position:absolute;top:50%;transform:translateY(-50%);height:36px;border-radius:18px;
+       display:flex;align-items:center;justify-content:center;
+       font-family:var(--disp);font-weight:700;font-size:16px;white-space:nowrap;padding:0 16px}
+  .bar.sm{height:32px;font-size:15px}
+
+  /* ---- header band ---- */
+  .bands{display:grid;grid-template-columns:var(--lab) 1fr;align-items:center;min-height:56px;margin-bottom:6px}
+  .bandtrack{position:relative;height:50px}
+  .band{position:absolute;top:0;height:50px;display:flex;align-items:center;justify-content:center;
+        font-family:var(--disp);font-weight:800;font-size:24px;color:#fff;letter-spacing:.01em;
+        clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
+        padding-right:14px}
+  .b1{background:#2b1f5e} .b2{background:#4b3fae} .b3{background:#6b5fd6} .b4{background:#a79bea}
+
+  /* ---- vertical rules ---- */
+  .rules{position:absolute;left:var(--lab);right:0;top:56px;bottom:0;pointer-events:none}
+  .rule{position:absolute;top:0;bottom:0;width:1px;background:rgba(12,12,15,.13)}
+
+  .sep{grid-column:1/-1;height:1px;background:rgba(12,12,15,.13);margin:2px 0 4px}
+
+  /* ---- gates ---- */
+  .gate{position:absolute;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:9px;
+        color:var(--red);font-family:var(--sans);font-weight:500;font-size:15px;white-space:nowrap}
+  .dia{width:15px;height:15px;border:2px solid var(--red);transform:rotate(45deg);flex:none}
+
+  /* ---- footer panel ---- */
+  .panel{margin-top:14px;background:#0c0c10;border-radius:12px;color:#fff;
+         display:grid;grid-template-columns:1.62fr repeat(4,1fr);align-items:center;
+         padding:22px 26px;gap:0}
+  .panel h3{font-family:var(--disp);font-weight:800;font-size:27px;letter-spacing:.005em}
+  .panel .cap{font-family:var(--sans);font-weight:300;font-size:16px;color:rgba(255,255,255,.72);margin-top:5px}
+  .ms{padding:0 20px;border-left:1px solid rgba(255,255,255,.22)}
+  .ms .k{font-family:var(--disp);font-weight:700;font-size:14px;letter-spacing:.05em;color:var(--teal);text-transform:uppercase}
+  .ms .v{font-family:var(--sans);font-weight:400;font-size:14px;color:rgba(255,255,255,.8);margin-top:5px}
+</style>
+</head>
+<body>
+<div class="grid">
+
+  <div class="rules">
+    <div class="rule" style="left:25%"></div>
+    <div class="rule" style="left:50%"></div>
+    <div class="rule" style="left:75%"></div>
+  </div>
+
+  <!-- band header -->
+  <div class="bands">
+    <div class="rlab" style="font-size:24px">Build Calendar</div>
+    <div class="bandtrack">
+      <div class="band b1" style="left:0;width:25.6%">AUG &ndash; OCT '26</div>
+      <div class="band b2" style="left:25%;width:25.6%">NOV '26 &ndash; FEB '27</div>
+      <div class="band b3" style="left:50%;width:25.6%">MAR &ndash; JUN '27</div>
+      <div class="band b4" style="left:75%;width:25%">JUL &ndash; AUG '27</div>
+    </div>
+  </div>
+
+  <!-- proving events -->
+  <div class="row">
+    <div class="rlab">Proving Events</div>
+    <div class="track">
+      <div class="bar" style="background:var(--teal);left:50.0%;width:13%">COHERENCE</div>
+      <div class="bar" style="background:var(--teal);left:64.5%;width:10.5%">ATOMIKA</div>
+      <div class="bar" style="background:var(--teal);left:76.5%;width:14.5%">MIDNIGHT SUN</div>
+      <div class="bar" style="background:var(--teal);left:92%;width:8%">EGYPT</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- capture -->
+  <div class="row">
+    <div class="rlab">Capture<small>event data pipelines</small></div>
+    <div class="track">
+      <div class="bar" style="background:var(--green);left:2.5%;width:11%">Iceland</div>
+      <div class="bar" style="background:var(--green);left:15%;width:31%">Coherence</div>
+      <div class="bar" style="background:var(--green);left:56%;width:12%">Atomika</div>
+      <div class="bar" style="background:var(--green);left:69.5%;width:24%">M.Sun + Egypt</div>
+    </div>
+  </div>
+
+  <!-- build -->
+  <div class="row">
+    <div class="rlab">Build<small>platform tooling</small></div>
+    <div class="track">
+      <div class="bar" style="background:var(--yellow);left:5%;width:22%">Insights engine</div>
+      <div class="bar" style="background:var(--yellow);left:28%;width:23%">Marketing tooling v1</div>
+    </div>
+  </div>
+  <div class="row" style="min-height:50px">
+    <div class="rlab"></div>
+    <div class="track" style="height:50px">
+      <div class="bar" style="background:var(--yellow);left:11.5%;width:27%">Plan stage + PM tooling</div>
+      <div class="bar" style="background:var(--yellow);left:39.5%;width:44%">Auto coaching</div>
+    </div>
+  </div>
+
+  <!-- gates -->
+  <div class="row" style="min-height:50px">
+    <div class="rlab">Gates</div>
+    <div class="track" style="height:50px">
+      <div class="gate" style="left:0">OCT 15 &middot; Iceland corpus freeze<span class="dia"></span></div>
+      <div class="gate" style="left:33%"><span class="dia"></span>DEC 15 &middot; Go/no-go: Plan module on Coherence</div>
+    </div>
+  </div>
+
+  <!-- prove -->
+  <div class="row">
+    <div class="rlab">Prove<small>festival-in-a-box</small></div>
+    <div class="track">
+      <div class="bar" style="background:var(--lav);left:5%;width:47%">Coherence: FIAB testing &rarr; live demand ladder</div>
+      <div class="bar" style="background:var(--lav);left:60%;width:29%">Egypt: end-to-end</div>
+    </div>
+  </div>
+  <div class="row" style="min-height:50px">
+    <div class="rlab"></div>
+    <div class="track" style="height:50px">
+      <div class="bar" style="background:var(--lav);left:47%;width:29%">Midnight Sun: full FIAB cycle</div>
+    </div>
+  </div>
+
+  <!-- harvest -->
+  <div class="row">
+    <div class="rlab">Harvest<small>templates for the next event</small></div>
+    <div class="track">
+      <div class="bar sm" style="background:var(--orange);left:14%;width:15.5%">Iceland &rarr; template</div>
+      <div class="bar sm" style="background:var(--orange);left:52%;width:11%">Coherence</div>
+      <div class="bar sm" style="background:var(--orange);left:65%;width:10%">Atomika</div>
+      <div class="bar sm" style="background:var(--orange);left:88%;width:12%">M.Sun + Egypt</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="panel">
+  <div>
+    <h3>IMXP OPERATING SYSTEM</h3>
+    <div class="cap">Every event is a live test; each harvest feeds the next build.</div>
+  </div>
+  <div class="ms"><div class="k">Data ingest + structure</div><div class="v">SEP &ndash; OCT '26</div></div>
+  <div class="ms"><div class="k">Plan + new solutions</div><div class="v">OCT &ndash; DEC '26</div></div>
+  <div class="ms"><div class="k">Coherence &middot; FIAB beta</div><div class="v">MAR '27</div></div>
+  <div class="ms"><div class="k">Atomika &middot; FIAB release</div><div class="v">MAY '27</div></div>
+</div>
+</body>
+</html>
