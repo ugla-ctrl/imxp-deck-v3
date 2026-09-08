@@ -226,6 +226,21 @@
   .dcrow{margin-top:clamp(5px,.7cqh,10px);align-items:start}
   .dclab{font-weight:700;font-size:clamp(.5rem,.78cqw,.7rem);line-height:1.25;color:var(--dim-d)}
   .slide.light .dclab{color:var(--dim-l)}
+
+  /* IMXP OS module band - rebuilt natively, replaces the os-shot screenshot */
+  .osband{background:#0c0c10;border-radius:16px;
+    padding:clamp(11px,1.4cqw,20px) clamp(14px,1.8cqw,26px);
+    display:grid;grid-template-columns:auto repeat(5,1fr);gap:clamp(9px,1.4cqw,22px);align-items:stretch}
+  .osband .oslab{display:flex;flex-direction:column;justify-content:center;
+    padding-right:clamp(10px,1.4cqw,20px);border-right:1px solid rgba(255,255,255,.2)}
+  .osk{font-family:var(--disp);font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--teal);font-size:clamp(.4rem,.6cqw,.54rem)}
+  .osn{font-family:var(--disp);font-weight:800;color:#fff;line-height:1.12;
+    font-size:clamp(.66rem,1.02cqw,.92rem);margin-top:.35em}
+  .osmod .n{font-family:var(--disp);font-weight:700;color:#fff;line-height:1.15;
+    font-size:clamp(.55rem,.8cqw,.73rem)}
+  .osmod .d{color:rgba(255,255,255,.56);line-height:1.35;margin-top:.42em;
+    font-size:clamp(.43rem,.63cqw,.57rem)}
   .devcal.compact .dcyr{padding:clamp(2px,.3cqh,5px) 0;font-size:clamp(.6rem,1.02cqw,.88rem)}
   .devcal.compact .ev,.devcal.compact .dcbar{padding:clamp(2px,.3cqh,5px) clamp(4px,.55cqw,9px);
     font-size:clamp(.42rem,.64cqw,.58rem)}
@@ -270,9 +285,9 @@
   .expanel img{height:clamp(60px,12cqh,118px);width:auto;max-width:100%;object-fit:contain;margin:0 auto}
 
   /* iceland eclipse badge on the events slide */
-  .eventbadge{position:absolute;top:clamp(20px,3.4cqh,38px);left:50%;transform:translateX(-50%);z-index:3;
-    height:clamp(104px,18cqh,180px);width:auto;image-rendering:auto}
-  @container (max-width:820px){ .eventbadge{height:88px} }
+  .eventbadge{position:absolute;top:clamp(16px,2.6cqh,30px);left:50%;transform:translateX(-50%);z-index:3;
+    height:clamp(150px,27cqh,290px);width:auto}
+  @container (max-width:820px){ .eventbadge{height:118px} }
 
   /* glass cards over a photo (events slide) */
   .gsplit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2.4cqw,36px)}
@@ -415,7 +430,7 @@
   </section>
 
   <!-- 5 · EVENTS · ICELAND -->
-  <section class="slide photo" style="padding-top:clamp(140px,24cqh,254px)">
+  <section class="slide photo" style="padding-top:clamp(186px,32cqh,344px)">
     <div class="bg" style="background-image:url('media/photos/ceremony.jpg')"></div>
     <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.66),rgba(0,0,0,.44) 38%,rgba(0,0,0,.74))"></div>
     <div class="chip">Events</div>
@@ -533,8 +548,18 @@
         </div>
       </div>
     </div>
-    <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:35cqh;margin:0 auto" src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
-    <div class="st mt-s" style="flex:none;text-align:center"><img class="imgpanel" style="width:auto;max-width:100%;max-height:15cqh;margin:0 auto" src="media/people/os-shot.jpg" alt="IMXP Operating System, in build: Participation Layer, Unified Profile, Reputation Graph, Agent Crew, Portal" /></div>
+    <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:45cqh;margin:0 auto" src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
+    <div class="st osband mt-s" style="flex:none">
+      <div class="oslab">
+        <div class="osk">In build</div>
+        <div class="osn">IMXP Operating<br/>System</div>
+      </div>
+      <div class="osmod"><div class="n">Participation Layer</div><div class="d">Volunteer, ritual, contribution events</div></div>
+      <div class="osmod"><div class="n">Unified Profile</div><div class="d">Identity + behavior + reputation</div></div>
+      <div class="osmod"><div class="n">Reputation Graph</div><div class="d">Trust scores, role progression</div></div>
+      <div class="osmod"><div class="n">Agent Crew</div><div class="d">Programmable AI workflows</div></div>
+      <div class="osmod"><div class="n">Portal</div><div class="d">Member-facing surface, deep personalization</div></div>
+    </div>
   </section>
 
   <!-- 9 · FIAB VIDEO DEMO -->
