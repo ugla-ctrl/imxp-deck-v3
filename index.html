@@ -225,6 +225,14 @@
     gap:clamp(5px,.7cqw,10px);align-items:center}
   .dcrow{margin-top:clamp(5px,.7cqh,10px);align-items:start}
   .dclab{font-weight:700;font-size:clamp(.5rem,.78cqw,.7rem);line-height:1.25;color:var(--dim-d)}
+  .slide.light .dclab{color:var(--dim-l)}
+  .devcal.compact .dcyr{padding:clamp(2px,.3cqh,5px) 0;font-size:clamp(.6rem,1.02cqw,.88rem)}
+  .devcal.compact .ev,.devcal.compact .dcbar{padding:clamp(2px,.3cqh,5px) clamp(4px,.55cqw,9px);
+    font-size:clamp(.42rem,.64cqw,.58rem)}
+  .devcal.compact .dcbar{padding-left:clamp(7px,.9cqw,14px);padding-right:clamp(7px,.9cqw,14px)}
+  .devcal.compact .dcrow{margin-top:clamp(3px,.45cqh,7px)}
+  .devcal.compact .dccell,.devcal.compact .dcbars{gap:clamp(2px,.3cqh,5px) 0}
+  .devcal.compact .dccell{gap:clamp(2px,.3cqh,5px)}
   .dcyr{text-align:center;color:#fff;font-weight:800;font-size:clamp(.7rem,1.25cqw,1.05rem);
     padding:clamp(3px,.45cqh,7px) 0;border-radius:7px}
   .dcyr.y1{background:#2b1f5e} .dcyr.y2{background:#4b3fae}
@@ -496,17 +504,37 @@
     </div>
   </section>
 
-  <!-- 8 · PRODUCT · BUILD ROADMAP -->
-  <section class="slide light">
-    <div class="chip">Product · Build Roadmap</div>
+  <!-- 8 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
+  <section class="slide light" style="padding-top:clamp(60px,9.8cqh,108px);padding-bottom:clamp(38px,6cqh,66px)">
+    <div class="chip">Product</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st" style="font-size:clamp(1.2rem,2.6cqw,2.3rem);max-width:none">Our operating system ships alongside the events that prove it</h2>
-    <div class="st imgpanel mt" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:48cqh;margin:0 auto" src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
-    <div class="st pillrow mt-s" style="flex:none;flex-wrap:nowrap;gap:clamp(7px,1cqw,14px)">
-      <div class="pill yellow" style="font-size:clamp(.56rem,.86cqw,.8rem)">Event Growth Engine &middot; community-led sales &amp; marketing</div>
-      <div class="pill teal" style="font-size:clamp(.56rem,.86cqw,.8rem)">Experience as a Service &middot; participation management &amp; incentivization</div>
-      <div class="pill lav" style="font-size:clamp(.56rem,.86cqw,.8rem)">Festival-in-a-box &middot; planning &amp; production automation</div>
+    <h2 class="st" style="max-width:none;font-size:clamp(.88rem,1.82cqw,1.55rem);line-height:1.14">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
+    <div class="st devcal compact mt-s">
+      <div class="dchead">
+        <div class="dclab">Development Calendar</div>
+        <div class="dcyr y1">2026</div>
+        <div class="dcyr y2">2027</div>
+        <div class="dcyr y3">2028</div>
+        <div class="dcyr y4">2029-30+</div>
+      </div>
+      <div class="dcrow">
+        <div class="dclab">New Destination<br/>Events</div>
+        <div class="dccell"><div class="ev lav">The Portal</div><div class="ev teal">Iceland Eclipse</div></div>
+        <div class="dccell"><div class="ev green">ATOMIKA</div><div class="ev green">COHERENCE</div><div class="ev teal">Egypt Eclipse</div></div>
+        <div class="dccell"><div class="ev teal">New Zealand Eclipse</div><div class="ev green">Antarctic Expedition</div></div>
+        <div class="dccell"><div class="ev teal">South Africa Eclipse</div><div class="ev green">Apophis</div></div>
+      </div>
+      <div class="dcrow">
+        <div class="dclab">Platform Functionality<br/>&amp; Monetization</div>
+        <div class="dcbars">
+          <div class="dcbar" style="grid-column:1/5">Event Growth Engine &middot; community-led sales &amp; marketing</div>
+          <div class="dcbar" style="grid-column:2/5">Experience as a Service &middot; participation management &amp; incentivization</div>
+          <div class="dcbar" style="grid-column:3/5">Festival-in-a-box &middot; planning &amp; production automation</div>
+        </div>
+      </div>
     </div>
+    <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:35cqh;margin:0 auto" src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
+    <div class="st mt-s" style="flex:none;text-align:center"><img class="imgpanel" style="width:auto;max-width:100%;max-height:15cqh;margin:0 auto" src="media/people/os-shot.jpg" alt="IMXP Operating System, in build: Participation Layer, Unified Profile, Reputation Graph, Agent Crew, Portal" /></div>
   </section>
 
   <!-- 9 · FIAB VIDEO DEMO -->
