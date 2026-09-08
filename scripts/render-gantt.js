@@ -6,7 +6,7 @@ const path = require('path');
 (async () => {
   const root = path.resolve(__dirname, '..');
   const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
-  const page = await browser.newPage({ viewport: { width: 1800, height: 640 }, deviceScaleFactor: 2 });
+  const page = await browser.newPage({ viewport: { width: 1800, height: 600 }, deviceScaleFactor: 2 });
   await page.goto('file://' + path.join(root, 'media/people/product-gantt.html'));
   await page.waitForTimeout(1200); // webfonts
   const el = await page.$('body');

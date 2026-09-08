@@ -54,7 +54,13 @@
   .slide.photo .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
   .slide.photo .shade{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 45%,rgba(0,0,0,.62))}
-  .slide.photo>*:not(.bg):not(.shade):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
+  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
+
+  /* looping muted background video (sits over .bg, under .shade) */
+  .bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+    opacity:0;transition:opacity .9s ease}
+  .bgvid.on{opacity:1}
+  @media (prefers-reduced-motion:reduce){ .bgvid{display:none} }
 
   /* per-slide chrome (matches the Canva deck) */
   .chip{position:absolute;top:clamp(26px,4.6cqh,52px);left:var(--edge);z-index:3;
@@ -219,47 +225,52 @@
   /* strategy pills */
   .pillrow{display:flex;gap:clamp(10px,1.4cqw,18px);flex-wrap:wrap}
 
-  /* development calendar (product slide, from the Canva info deck page 8) */
+  /* development calendar - same colour language as the roadmap chart:
+     indigo = events, amber = platform work, light chips = time */
   .devcal{--dclab:clamp(88px,13cqw,180px);font-family:var(--disp)}
   .dchead,.dcrow{display:grid;grid-template-columns:var(--dclab) repeat(4,1fr);
     gap:clamp(5px,.7cqw,10px);align-items:center}
   .dcrow{margin-top:clamp(5px,.7cqh,10px);align-items:start}
-  .dclab{font-weight:700;font-size:clamp(.5rem,.78cqw,.7rem);line-height:1.25;color:var(--dim-d)}
-  .slide.light .dclab{color:var(--dim-l)}
+  .dclab{font-weight:800;font-size:clamp(.46rem,.7cqw,.62rem);line-height:1.25;
+    letter-spacing:.13em;text-transform:uppercase;color:#7c7c8a}
+  .dcyr{text-align:center;background:#f2f1f8;color:#2b1f5e;font-weight:800;
+    font-size:clamp(.6rem,1.02cqw,.88rem);padding:clamp(3px,.5cqh,8px) 0;border-radius:7px}
+  .dccell{display:flex;flex-direction:column;gap:clamp(3px,.4cqh,6px)}
+  .ev{border-radius:8px;padding:clamp(3px,.45cqh,7px) clamp(6px,.8cqw,13px);
+    font-weight:700;font-size:clamp(.44rem,.68cqw,.62rem);line-height:1.2;
+    background:#4b3fae;color:#fff;text-align:center}
+  .dcbars{grid-column:2/6;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(3px,.4cqh,6px) 0}
+  .dcbar{background:var(--yellow);color:#14141a;border-radius:8px;
+    padding:clamp(3px,.45cqh,7px) clamp(8px,1cqw,15px);font-weight:700;
+    font-size:clamp(.44rem,.68cqw,.62rem);line-height:1.2}
+  .devcal.compact .dcyr{padding:clamp(2px,.32cqh,6px) 0;font-size:clamp(.56rem,.96cqw,.84rem)}
+  .devcal.compact .ev,.devcal.compact .dcbar{padding:clamp(2px,.32cqh,6px) clamp(5px,.66cqw,11px);
+    font-size:clamp(.42rem,.64cqw,.58rem)}
+  .devcal.compact .dcrow{margin-top:clamp(3px,.45cqh,7px)}
+  .devcal.compact .dccell,.devcal.compact .dcbars{gap:clamp(2px,.32cqh,5px) 0}
+  .devcal.compact .dccell{gap:clamp(2px,.32cqh,5px)}
 
-  /* IMXP OS module band - rebuilt natively, replaces the os-shot screenshot */
-  .osband{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:16px;
+  /* section eyebrow above each chart */
+  .seclab{font-family:var(--disp);font-weight:800;font-size:clamp(.5rem,.76cqw,.68rem);
+    letter-spacing:.16em;text-transform:uppercase;color:#7c7c8a;
+    display:flex;align-items:center;gap:.8em}
+  .seclab::after{content:'';flex:1;height:1px;background:#e6e6ee}
+
+  /* IMXP OS module band */
+  .osband{background:#f6f6fa;border:1px solid #e6e6ee;border-radius:16px;
     padding:clamp(11px,1.4cqw,20px) clamp(14px,1.8cqw,26px);
     display:grid;grid-template-columns:auto repeat(5,1fr);gap:clamp(9px,1.4cqw,22px);align-items:stretch}
   .osband .oslab{display:flex;flex-direction:column;justify-content:center;
-    padding-right:clamp(10px,1.4cqw,20px);border-right:1px solid rgba(255,255,255,.2)}
-  .osk{font-family:var(--disp);font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-    color:var(--teal);font-size:clamp(.4rem,.6cqw,.54rem)}
-  .osn{font-family:var(--disp);font-weight:800;color:#fff;line-height:1.12;
+    padding-right:clamp(10px,1.4cqw,20px);border-right:1px solid #e0e0ea}
+  .osk{font-family:var(--disp);font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+    color:#4b3fae;font-size:clamp(.4rem,.6cqw,.54rem)}
+  .osn{font-family:var(--disp);font-weight:800;color:#14141a;line-height:1.12;
     font-size:clamp(.66rem,1.02cqw,.92rem);margin-top:.35em}
-  .osmod .n{font-family:var(--disp);font-weight:700;color:#fff;line-height:1.15;
+  .osmod .n{font-family:var(--disp);font-weight:700;color:#14141a;line-height:1.15;
     font-size:clamp(.55rem,.8cqw,.73rem)}
-  .osmod .d{color:rgba(255,255,255,.56);line-height:1.35;margin-top:.42em;
+  .osmod .d{color:#7c7c8a;line-height:1.35;margin-top:.42em;
     font-size:clamp(.43rem,.63cqw,.57rem)}
-  .devcal.compact .dcyr{padding:clamp(2px,.3cqh,5px) 0;font-size:clamp(.6rem,1.02cqw,.88rem)}
-  .devcal.compact .ev,.devcal.compact .dcbar{padding:clamp(2px,.3cqh,5px) clamp(4px,.55cqw,9px);
-    font-size:clamp(.42rem,.64cqw,.58rem)}
-  .devcal.compact .dcbar{padding-left:clamp(7px,.9cqw,14px);padding-right:clamp(7px,.9cqw,14px)}
-  .devcal.compact .dcrow{margin-top:clamp(3px,.45cqh,7px)}
-  .devcal.compact .dccell,.devcal.compact .dcbars{gap:clamp(2px,.3cqh,5px) 0}
-  .devcal.compact .dccell{gap:clamp(2px,.3cqh,5px)}
-  .dcyr{text-align:center;color:#fff;font-weight:800;font-size:clamp(.7rem,1.25cqw,1.05rem);
-    padding:clamp(3px,.45cqh,7px) 0;border-radius:7px}
-  .dcyr.y1{background:#2b1f5e} .dcyr.y2{background:#4b3fae}
-  .dcyr.y3{background:#6b5fd6} .dcyr.y4{background:#a79bea;color:#0c0c0f}
-  .dccell{display:flex;flex-direction:column;gap:clamp(3px,.4cqh,6px)}
-  .ev{text-align:center;border-radius:20px;padding:clamp(3px,.45cqh,7px) clamp(4px,.6cqw,10px);
-    font-weight:700;font-size:clamp(.48rem,.72cqw,.66rem);color:#0c0c0f;line-height:1.2}
-  .ev.teal{background:var(--teal)} .ev.green{background:var(--green)} .ev.lav{background:var(--lav)}
-  .dcbars{grid-column:2/6;display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(3px,.4cqh,6px) 0}
-  .dcbar{background:var(--yellow);color:#0c0c0f;border-radius:20px;
-    padding:clamp(3px,.45cqh,7px) clamp(8px,1cqw,16px);font-weight:700;
-    font-size:clamp(.48rem,.72cqw,.66rem);line-height:1.2}
+
   .pill{border-radius:999px;padding:clamp(8px,1.2cqh,13px) clamp(14px,1.9cqw,26px);
     font-family:var(--disp);font-weight:800;color:var(--ink);font-size:clamp(.66rem,1cqw,.9rem);line-height:1.3}
   .pill.teal{background:var(--teal)} .pill.green{background:var(--green)}
@@ -402,8 +413,10 @@
 
   <!-- 3 · MARKET -->
   <section class="slide photo">
-    <div class="bg" style="background-image:url('media/photos/crowd-hands.jpg')"></div>
-    <div class="shade"></div>
+    <div class="bg" style="background-image:url('media/market-bg-poster.jpg')"></div>
+    <video class="bgvid" src="media/market-bg.mp4" poster="media/market-bg-poster.jpg"
+           muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.6),rgba(0,0,0,.34) 45%,rgba(0,0,0,.68))"></div>
     <div class="chip">Market Opportunity</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <h2 class="st" style="color:#fff;font-size:clamp(1.8rem,4.4cqw,3.8rem);max-width:15ch">Real-world experience is in demand</h2>
@@ -522,10 +535,11 @@
   </section>
 
   <!-- 8 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
-  <section class="slide dark" style="padding-top:clamp(60px,9.8cqh,108px);padding-bottom:clamp(38px,6cqh,66px)">
+  <section class="slide light" style="padding-top:clamp(56px,9cqh,100px);padding-bottom:clamp(36px,5.6cqh,62px)">
     <div class="chip">Product</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st" style="color:#fff;max-width:none;font-size:clamp(.88rem,1.82cqw,1.55rem);line-height:1.14">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
+    <h2 class="st" style="max-width:none;font-size:clamp(.88rem,1.82cqw,1.55rem);line-height:1.14">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
+    <div class="st seclab mt-s">Where we go &middot; 2026 to 2030</div>
     <div class="st devcal compact mt-s">
       <div class="dchead">
         <div class="dclab">Development Calendar</div>
@@ -536,10 +550,10 @@
       </div>
       <div class="dcrow">
         <div class="dclab">New Destination<br/>Events</div>
-        <div class="dccell"><div class="ev lav">The Portal</div><div class="ev teal">Iceland Eclipse</div></div>
-        <div class="dccell"><div class="ev green">ATOMIKA</div><div class="ev green">COHERENCE</div><div class="ev teal">Egypt Eclipse</div></div>
-        <div class="dccell"><div class="ev teal">New Zealand Eclipse</div><div class="ev green">Antarctic Expedition</div></div>
-        <div class="dccell"><div class="ev teal">South Africa Eclipse</div><div class="ev green">Apophis</div></div>
+        <div class="dccell"><div class="ev">The Portal</div><div class="ev">Iceland Eclipse</div></div>
+        <div class="dccell"><div class="ev">ATOMIKA</div><div class="ev">COHERENCE</div><div class="ev">Egypt Eclipse</div></div>
+        <div class="dccell"><div class="ev">New Zealand Eclipse</div><div class="ev">Antarctic Expedition</div></div>
+        <div class="dccell"><div class="ev">South Africa Eclipse</div><div class="ev">Apophis</div></div>
       </div>
       <div class="dcrow">
         <div class="dclab">Platform Functionality<br/>&amp; Monetization</div>
@@ -550,6 +564,7 @@
         </div>
       </div>
     </div>
+    <div class="st seclab mt">What we build &middot; Aug 2026 to Aug 2027</div>
     <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:45cqh;margin:0 auto" src="media/people/product-gantt.png" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
     <div class="st osband mt-s" style="flex:none">
       <div class="oslab">
@@ -653,6 +668,10 @@ function go(n){
   ctr.textContent=pad(i+1)+' / '+pad(slides.length);
   if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));
   if(vid && !slides[i].contains(vid)) vid.pause();
+  document.querySelectorAll('.bgvid').forEach(v=>{
+    if(slides[i].contains(v)){ v.play().then(()=>v.classList.add('on')).catch(()=>{}); }
+    else { v.pause(); v.classList.remove('on'); }
+  });
 }
 const next=()=>go(i+1), prev=()=>go(i-1);
 document.getElementById('next').onclick=next;
