@@ -26,13 +26,13 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%}
-  body{background:linear-gradient(170deg,#0a0a10,#12121c);color:var(--ink);font-family:var(--sans);
+  body{background:linear-gradient(170deg,#26262c,#1c1c21);color:var(--ink);font-family:var(--sans);
     overflow:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
   #frame{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:3.2vh 2.4vw}
   #stage{position:relative;aspect-ratio:16/9;width:min(94vw,calc(92vh*16/9));
     border-radius:14px;overflow:hidden;container-type:size;
     box-shadow:0 30px 80px rgba(0,0,0,.65),0 4px 16px rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.08);background:#17171c}
+    border:1px solid rgba(255,255,255,.08);background:#0b0b0f}
   #deck{position:absolute;inset:0}
 
   /* ---------- slides ---------- */
@@ -67,7 +67,7 @@
     font-family:var(--disp);font-weight:800;font-size:clamp(.7rem,.95cqw,.88rem)}
   .slide.light .chip,.slide.light .fd{color:var(--ink)}
   .slide.photo .chip,.slide.photo .fd,.slide.dark .chip,.slide.dark .fd{color:var(--white)}
-  .slide.dark{background:#17171c;color:var(--white)}
+  .slide.dark{background:#0b0b0f;color:var(--white)}
 
   /* type */
   h1{font-family:var(--disp);font-weight:900;line-height:1.02;letter-spacing:-.01em;
@@ -211,7 +211,7 @@
   .bignum.teal .n{color:var(--teal)} .bignum.yellow .n{color:var(--yellow)} .bignum.lav .n{color:var(--lav)}
   .bignum .l{margin-top:.45em;font-size:clamp(.68rem,1cqw,.92rem);color:var(--dim-d);max-width:20ch;line-height:1.45}
   /* image panels */
-  .imgpanel{border-radius:14px;overflow:hidden;border:1px solid var(--line-l);background:#17171c}
+  .imgpanel{border-radius:14px;overflow:hidden;border:1px solid var(--line-l);background:#0b0b0f}
   .imgpanel img{width:100%;height:auto;display:block}
   .slide.dark .imgpanel{border-color:var(--line-d)}
   .chartrow{display:grid;grid-template-columns:2fr 3fr;gap:clamp(14px,2cqw,28px);align-items:stretch}
