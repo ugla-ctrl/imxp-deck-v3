@@ -32,7 +32,7 @@
   #stage{position:relative;aspect-ratio:16/9;width:min(94vw,calc(92vh*16/9));
     border-radius:14px;overflow:hidden;container-type:size;
     box-shadow:0 30px 80px rgba(0,0,0,.65),0 4px 16px rgba(0,0,0,.4);
-    border:1px solid rgba(255,255,255,.08);background:#0b0b0f}
+    border:1px solid rgba(255,255,255,.08);background:#17171c}
   #deck{position:absolute;inset:0}
 
   /* ---------- slides ---------- */
@@ -67,7 +67,7 @@
     font-family:var(--disp);font-weight:800;font-size:clamp(.7rem,.95cqw,.88rem)}
   .slide.light .chip,.slide.light .fd{color:var(--ink)}
   .slide.photo .chip,.slide.photo .fd,.slide.dark .chip,.slide.dark .fd{color:var(--white)}
-  .slide.dark{background:#0b0b0f;color:var(--white)}
+  .slide.dark{background:#17171c;color:var(--white)}
 
   /* type */
   h1{font-family:var(--disp);font-weight:900;line-height:1.02;letter-spacing:-.01em;
@@ -211,7 +211,7 @@
   .bignum.teal .n{color:var(--teal)} .bignum.yellow .n{color:var(--yellow)} .bignum.lav .n{color:var(--lav)}
   .bignum .l{margin-top:.45em;font-size:clamp(.68rem,1cqw,.92rem);color:var(--dim-d);max-width:20ch;line-height:1.45}
   /* image panels */
-  .imgpanel{border-radius:14px;overflow:hidden;border:1px solid var(--line-l);background:#0b0b0f}
+  .imgpanel{border-radius:14px;overflow:hidden;border:1px solid var(--line-l);background:#17171c}
   .imgpanel img{width:100%;height:auto;display:block}
   .slide.dark .imgpanel{border-color:var(--line-d)}
   .chartrow{display:grid;grid-template-columns:2fr 3fr;gap:clamp(14px,2cqw,28px);align-items:stretch}
@@ -228,7 +228,7 @@
   .slide.light .dclab{color:var(--dim-l)}
 
   /* IMXP OS module band - rebuilt natively, replaces the os-shot screenshot */
-  .osband{background:#0c0c10;border-radius:16px;
+  .osband{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.13);border-radius:16px;
     padding:clamp(11px,1.4cqw,20px) clamp(14px,1.8cqw,26px);
     display:grid;grid-template-columns:auto repeat(5,1fr);gap:clamp(9px,1.4cqw,22px);align-items:stretch}
   .osband .oslab{display:flex;flex-direction:column;justify-content:center;
@@ -522,10 +522,10 @@
   </section>
 
   <!-- 8 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
-  <section class="slide light" style="padding-top:clamp(60px,9.8cqh,108px);padding-bottom:clamp(38px,6cqh,66px)">
+  <section class="slide dark" style="padding-top:clamp(60px,9.8cqh,108px);padding-bottom:clamp(38px,6cqh,66px)">
     <div class="chip">Product</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <h2 class="st" style="max-width:none;font-size:clamp(.88rem,1.82cqw,1.55rem);line-height:1.14">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
+    <h2 class="st" style="color:#fff;max-width:none;font-size:clamp(.88rem,1.82cqw,1.55rem);line-height:1.14">Our vertically-integrated platform increases margins by growing revenue, aligning globally-distributed operations and automating production</h2>
     <div class="st devcal compact mt-s">
       <div class="dchead">
         <div class="dclab">Development Calendar</div>
@@ -550,7 +550,7 @@
         </div>
       </div>
     </div>
-    <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:45cqh;margin:0 auto" src="media/people/product-gantt.jpg" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
+    <div class="st imgpanel mt-s" style="border:0;background:transparent;flex:none;text-align:center"><img style="width:auto;max-width:100%;max-height:45cqh;margin:0 auto" src="media/people/product-gantt.png" alt="IMXP platform build roadmap, Aug 2026 to Aug 2027: capture, build, prove, gates, harvest across Atomika, Coherence, Midnight Sun and Egypt" /></div>
     <div class="st osband mt-s" style="flex:none">
       <div class="oslab">
         <div class="osk">In build</div>

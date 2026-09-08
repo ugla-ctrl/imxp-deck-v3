@@ -25,11 +25,11 @@
     --rowh:58px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1800px;background:#fff;font-family:var(--sans);color:var(--ink);padding:18px 22px 22px}
+  body{width:1800px;background:transparent;font-family:var(--sans);color:#fff;padding:10px 14px 14px}
   .grid{position:relative}
   .row{display:grid;grid-template-columns:var(--lab) 1fr;align-items:center;min-height:var(--rowh)}
-  .rlab{font-family:var(--disp);font-weight:800;font-size:21px;line-height:1.15}
-  .rlab small{display:block;font-family:var(--sans);font-weight:400;font-size:13px;color:var(--grey);margin-top:2px}
+  .rlab{font-family:var(--disp);font-weight:800;font-size:21px;line-height:1.15;color:#fff}
+  .rlab small{display:block;font-family:var(--sans);font-weight:400;font-size:13px;color:rgba(255,255,255,.45);margin-top:2px}
   .track{position:relative;height:var(--rowh)}
   .bar{position:absolute;top:50%;transform:translateY(-50%);height:36px;border-radius:18px;
        display:flex;align-items:center;justify-content:center;
@@ -47,14 +47,14 @@
 
   /* ---- vertical rules ---- */
   .rules{position:absolute;left:var(--lab);right:0;top:56px;bottom:0;pointer-events:none}
-  .rule{position:absolute;top:0;bottom:0;width:1px;background:rgba(12,12,15,.13)}
+  .rule{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.14)}
 
-  .sep{grid-column:1/-1;height:1px;background:rgba(12,12,15,.13);margin:2px 0 4px}
+  .sep{grid-column:1/-1;height:1px;background:rgba(255,255,255,.16);margin:2px 0 4px}
 
   /* ---- gates ---- */
   .gate{position:absolute;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:9px;
-        color:var(--red);font-family:var(--sans);font-weight:500;font-size:15px;white-space:nowrap}
-  .dia{width:15px;height:15px;border:2px solid var(--red);transform:rotate(45deg);flex:none}
+        color:var(--yellow);font-family:var(--sans);font-weight:600;font-size:15px;white-space:nowrap}
+  .dia{width:14px;height:14px;border:2px solid var(--yellow);transform:rotate(45deg);flex:none}
 
   /* ---- footer panel ---- */
   .panel{margin-top:14px;background:#0c0c10;border-radius:12px;color:#fff;
