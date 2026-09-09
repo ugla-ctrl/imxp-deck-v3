@@ -54,13 +54,20 @@
   .slide.photo .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
   .slide.photo .shade{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 45%,rgba(0,0,0,.62))}
-  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.vignette):not(.scrim):not(.grain):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
+  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.vignette):not(.scrim):not(.grain):not(.chip):not(.logo):not(.fd):not(.eventbadge):not(.clouds){position:relative;z-index:2}
 
   /* looping muted background video (sits over .bg, under .shade) */
   .bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
     opacity:0;transition:opacity .9s ease}
   .bgvid.on{opacity:1}
   @media (prefers-reduced-motion:reduce){ .bgvid{display:none} }
+  /* drifting cloud layers (Mission) - base image + moon stay static */
+  .clouds{position:absolute;inset:0;z-index:0;pointer-events:none;background-repeat:repeat;mix-blend-mode:screen;background-image:url('media/photos/clouds.png')}
+  .clouds.c1{background-size:1100px 1100px;opacity:.20;animation:cloudA 85s linear infinite}
+  .clouds.c2{background-size:1650px 1650px;opacity:.12;animation:cloudB 140s linear infinite}
+  @keyframes cloudA{from{background-position:0 0}to{background-position:1100px 0}}
+  @keyframes cloudB{from{background-position:0 0}to{background-position:-1650px 0}}
+  @media (prefers-reduced-motion:reduce){ .clouds{animation:none!important;opacity:.08} }
   /* --- slide-specific video-bg treatments (2026-09-09) --- */
   .s4card{position:relative;z-index:2;align-self:center;text-align:center;max-width:min(720px,80cqw);padding:clamp(24px,3.8cqh,44px) clamp(28px,3.4cqw,52px);border-radius:20px;background:rgba(8,10,16,.34);-webkit-backdrop-filter:blur(16px) saturate(1.08);backdrop-filter:blur(16px) saturate(1.08);border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 70px rgba(0,0,0,.5)}
   .s4card h2{color:#fff;max-width:none;font-size:clamp(1.3rem,2.8cqw,2.4rem);margin:0}
@@ -444,7 +451,9 @@
 
   <!-- 2 · MISSION -->
   <section class="slide photo center">
-    <div class="bg cine" style="background-image:url('media/photos/eclipse-sky.jpg')"></div>
+    <div class="bg" style="background-image:url('media/photos/eclipse-sky.jpg')"></div>
+    <div class="clouds c1"></div>
+    <div class="clouds c2"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
     <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.2) 46%,rgba(0,0,0,.6))"></div>
