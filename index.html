@@ -413,6 +413,22 @@
   @media (max-width:1024px) and (orientation:portrait){
     #frame{padding:1.4vh 3vw}
     #stage{aspect-ratio:auto;width:100%;height:calc(100dvh - 2.8vh - 44px)}
+    /* tall slides scroll vertically (horizontal swipe still navigates); reclaim top/bottom padding */
+    .slide{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;
+      padding:clamp(52px,7cqh,86px) clamp(20px,5cqw,40px) clamp(44px,6cqh,72px)}
+    .arrows{display:none}
+    /* Product (8): fit the roadmap to width, wrap the OS modules so they stay legible */
+    .s8 .imgpanel img{max-height:none!important;width:100%!important;height:auto!important}
+    .s8 .osband{grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+    .s8 .osband .oslab{grid-column:1/-1;border-right:none;border-bottom:1px solid rgba(255,255,255,.22);padding:0 0 10px}
+    .s8 .osk{font-size:.6rem} .s8 .osn{font-size:1.05rem}
+    .s8 .osmod .n{font-size:.92rem} .s8 .osmod .d{font-size:.74rem}
+    /* Upcoming events grid: two-up on portrait */
+    .evgrid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .s8 .osband{grid-template-columns:1fr}
+    .evgrid{grid-template-columns:1fr}
   }
   @media (max-width:820px){
     .t4,.roster{grid-template-columns:repeat(2,1fr)}
