@@ -72,6 +72,11 @@
   .s7 .evcard .en{color:#fff}
   .s7 .evcard .lo{color:#cfd8e6}
   .s7 .evgrid .e2 .dt{color:#ff8577}
+  /* Netflix-style "now playing" layout (slide 4) */
+  .nflx{position:relative;z-index:2;max-width:min(720px,60cqw)}
+  .nflx-title{color:#fff;font-weight:800;line-height:1.04;letter-spacing:-.012em;font-size:clamp(1.9rem,4cqw,3.4rem);margin:0;max-width:none}
+  .nflx-desc{margin-top:clamp(16px,2.5cqh,30px);color:#c9d2e0;font-size:clamp(.95rem,1.32cqw,1.18rem);line-height:1.55;max-width:52ch}
+  .nflx-desc strong{color:#fff;font-weight:700}
 
   /* cinematic treatment: slow drift, vignette, grade, film grain.
      Keeps the same photo; adds depth and motion rather than replacing it. */
@@ -470,11 +475,9 @@
     <div class="shade" style="background:linear-gradient(90deg,rgba(4,6,12,.86) 0%,rgba(4,6,12,.62) 40%,rgba(4,6,12,.28) 70%,rgba(4,6,12,.42) 100%)"></div>
     <div class="chip">The Challenge</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <div class="content-l">
-      <h2 class="st" style="max-width:none;color:#fff">We are advancing technologically, but losing coherence as a species</h2>
-      <p class="st mt" style="color:#e8edf6">IMXP is addressing this at the most fundamental level.</p>
-      <p class="st mt-s s4hl" style="color:#e8edf6"><strong>We reconnect the human network through shared experience,</strong> and build the systems that let that network coordinate at planetary scale.</p>
-      <p class="st mt-s" style="color:#cdd6e4">Our experiences are the human foundation required to organize what comes next.</p>
+    <div class="nflx">
+      <h2 class="st nflx-title">We are advancing technologically, but losing coherence as a species</h2>
+      <p class="st nflx-desc">IMXP is addressing this at the most fundamental level. <strong>We reconnect the human network through shared experience,</strong> and build the systems that let that network coordinate at planetary scale. Our experiences are the human foundation required to organize what comes next.</p>
     </div>
   </section>
 
