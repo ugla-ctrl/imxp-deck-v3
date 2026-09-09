@@ -61,6 +61,17 @@
     opacity:0;transition:opacity .9s ease}
   .bgvid.on{opacity:1}
   @media (prefers-reduced-motion:reduce){ .bgvid{display:none} }
+  /* --- slide-specific video-bg treatments (2026-09-09) --- */
+  .s4card{position:relative;z-index:2;max-width:min(760px,86cqw);padding:clamp(22px,3.4cqh,40px) clamp(24px,3cqw,46px);border-radius:20px;background:rgba(8,10,16,.32);-webkit-backdrop-filter:blur(16px) saturate(1.08);backdrop-filter:blur(16px) saturate(1.08);border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 70px rgba(0,0,0,.5)}
+  .s4card h2{color:#fff;max-width:none;font-size:clamp(1.3rem,2.8cqw,2.4rem);margin:0}
+  .s4card p{color:#dfe6f2}
+  .s4card .s4hl{font-size:clamp(1rem,1.5cqw,1.28rem);color:#fff}
+  .s4card .s4hl strong{color:#ffd39a}
+  .s5vid{filter:contrast(1.06) saturate(1.06)}
+  .s7 h2{color:#fff}
+  .s7 .evcard .en{color:#fff}
+  .s7 .evcard .lo{color:#cfd8e6}
+  .s7 .evgrid .e2 .dt{color:#ff8577}
 
   /* cinematic treatment: slow drift, vignette, grade, film grain.
      Keeps the same photo; adds depth and motion rather than replacing it. */
@@ -456,25 +467,27 @@
     <div class="bg" style="background-image:url('media/challenge-bg-poster.jpg')"></div>
     <video class="bgvid" src="media/challenge-bg.mp4" poster="media/challenge-bg-poster.jpg"
            muted loop playsinline preload="auto" aria-hidden="true"></video>
-    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.66),rgba(0,0,0,.46) 45%,rgba(0,0,0,.72))"></div>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.26) 45%,rgba(0,0,0,.58))"></div>
     <div class="chip">The Challenge</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <div class="st" style="max-width:min(900px,84cqw)">
-      <h2 style="color:#fff;max-width:none;font-size:clamp(1.3rem,2.9cqw,2.5rem)">We are advancing technologically, but losing coherence as a species</h2>
-      <p class="mt">IMXP is addressing this at the most fundamental level:</p>
-      <p class="mt-s"><strong>We reconnect the human network through shared experience,</strong> and build the systems that allow that network to coordinate at planetary scale. This is how large-scale coordination begins.</p>
-      <p class="mt-s">Our experiences serve as the human foundation required to organize what comes next.</p>
+    <div class="s4card">
+      <h2 class="st">We are advancing technologically, but losing coherence as a species</h2>
+      <p class="st mt-s">IMXP is addressing this at the most fundamental level.</p>
+      <p class="st mt-s s4hl"><strong>We reconnect the human network through shared experience,</strong> and build the systems that let that network coordinate at planetary scale.</p>
+      <p class="st mt-s">Our experiences are the human foundation required to organize what comes next.</p>
     </div>
   </section>
 
   <!-- 5 · SOLUTION -->
-  <section class="slide light">
-    <img class="half-img" src="media/photos/site-setup.jpg" alt="Iceland Eclipse festival site" />
+  <section class="slide photo dark">
+    <div class="bg" style="background-image:url('media/solution-bg-poster.jpg')"></div>
+    <video class="bgvid s5vid" src="media/solution-bg.mp4" poster="media/solution-bg-poster.jpg" muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="shade" style="background:linear-gradient(90deg,rgba(4,6,12,.76) 0%,rgba(4,6,12,.46) 40%,rgba(4,6,12,.06) 70%,rgba(4,6,12,.2) 100%)"></div>
     <div class="chip">Solution</div>
-    <div class="logo"><img src="imxp-logo.png" alt="" style="filter:none" /></div>
+    <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <div class="content-l">
-      <h2 class="st" style="max-width:none">We are building the platform for rapidly deploying festivals and transformative gatherings globally</h2>
-      <p class="st mt">The next generation of complex, distributed experiences and work will require both <strong>aligned people and systems</strong>.</p>
+      <h2 class="st" style="max-width:none;color:#fff">We are building the platform for rapidly deploying festivals and transformative gatherings globally</h2>
+      <p class="st mt" style="color:#e8edf6">The next generation of complex, distributed experiences and work will require both <strong>aligned people and systems</strong>.</p>
       <div class="st pillrow mt">
         <div class="pill green">Rapid deployment</div>
         <div class="pill teal">Globally distributed</div>
@@ -516,7 +529,10 @@
   </section>
 
   <!-- 7 · UPCOMING EVENTS -->
-  <section class="slide light">
+  <section class="slide photo dark s7">
+    <div class="bg" style="background-image:url('media/upcoming-bg-poster.jpg')"></div>
+    <video class="bgvid" src="media/upcoming-bg.mp4" poster="media/upcoming-bg-poster.jpg" muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.34) 42%,rgba(0,0,0,.64))"></div>
     <div class="chip">Upcoming Events</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <h2 class="st" style="font-size:clamp(1.3rem,2.7cqw,2.4rem)">Our forward slate, 2027 and beyond</h2>
@@ -555,25 +571,7 @@
     <p class="st calnote mt-s">Beyond 2028: South Africa Eclipse, Apophis, and the Antarctic Expedition (2029-30+), continuing IMXP's global expansion.</p>
   </section>
 
-  <!-- 8 · ATOMIKA -->
-  <section class="slide dark">
-    <div class="chip">Experience Expansion</div>
-    <div class="logo"><img src="imxp-logo.png" alt="" /></div>
-    <div class="st split" style="align-items:center">
-      <div class="imgpanel"><img src="media/events/atomika.jpg" alt="ATOMIKA, Roswell, New Mexico" /></div>
-      <div>
-        <h2 style="color:#fff;max-width:none">ATOMIKA</h2>
-        <p class="sub mt-s" style="color:#fff;max-width:none">Together we will transform a doomsday weapon into a hub of interstellar imagination, fostering a cross-disciplinary exploration of contact, consciousness, and cosmic culture.</p>
-        <p class="mt-s">ATOMIKA is an experimental, annual gathering that fuses immersive art, deep inquiry, and powerful music within and around a Cold War era nuclear missile silo near Roswell, New Mexico.</p>
-        <div class="pillrow mt-s">
-          <div class="pill teal">7-9 May 2027</div>
-          <div class="pill lav">Twistflower Rd &middot; Roswell, New Mexico</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 9 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
+  <!-- 8 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
   <section class="slide light" style="padding-top:clamp(56px,9cqh,100px);padding-bottom:clamp(36px,5.6cqh,62px)">
     <div class="chip">Product</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
@@ -618,7 +616,7 @@
     </div>
   </section>
 
-  <!-- 10 · FIAB VIDEO DEMO -->
+  <!-- 9 · FIAB VIDEO DEMO -->
   <section class="slide photo dark center">
     <div class="bg" style="background-image:url('media/festival-bg-poster.jpg')"></div>
     <video class="bgvid" src="media/festival-bg.mp4" poster="media/festival-bg-poster.jpg"
@@ -634,7 +632,7 @@
     </div>
   </section>
 
-  <!-- 11 · VISION -->
+  <!-- 10 · VISION -->
   <section class="slide photo center">
     <!-- Aurora borealis streak, Iceland Eclipse 2026. Photo: Jake Rosenberg. -->
     <div class="bg cine vivid" style="background-image:url('media/photos/aurora-streak.jpg')"></div>
@@ -648,7 +646,7 @@
     <p class="st mt" style="max-width:none;font-family:var(--disp);font-weight:600;font-size:clamp(.95rem,1.7vw,1.4rem);color:#fff">We are building the systems to one day see a total solar eclipse from the Moon</p>
   </section>
 
-  <!-- 12 · THANK YOU -->
+  <!-- 11 · THANK YOU -->
   <section class="slide photo center">
     <div class="bg" style="background-image:url('media/photos/golden-hug.jpg')"></div>
     <div class="shade"></div>
