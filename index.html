@@ -54,7 +54,7 @@
   .slide.photo .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
   .slide.photo .shade{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 45%,rgba(0,0,0,.62))}
-  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.vignette):not(.grain):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
+  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.vignette):not(.scrim):not(.grain):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
 
   /* looping muted background video (sits over .bg, under .shade) */
   .bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
@@ -76,6 +76,11 @@
   .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.085;mix-blend-mode:overlay;
     background-size:200px 200px;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+  /* vivid variant: for colour-led photos that should not be graded down */
+  .bg.cine.vivid{filter:contrast(1.10) saturate(1.16) brightness(1.0)}
+  /* soft centre scrim, so large type stays legible over a bright subject */
+  .scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(72% 56% at 50% 50%,rgba(2,10,26,.5),rgba(2,10,26,.16) 62%,rgba(2,10,26,0) 82%)}
   @media (prefers-reduced-motion:reduce){ .slide.active .bg.cine{animation:none} }
 
   /* per-slide chrome (matches the Canva deck) */
@@ -626,8 +631,12 @@
 
   <!-- 11 · VISION -->
   <section class="slide photo center">
-    <div class="bg" style="background-image:url('media/photos/aurora.jpg')"></div>
-    <div class="shade"></div>
+    <!-- Aurora borealis streak, Iceland Eclipse 2026. Photo: Jake Rosenberg. -->
+    <div class="bg cine vivid" style="background-image:url('media/photos/aurora-streak.jpg')"></div>
+    <div class="vignette"></div>
+    <div class="scrim"></div>
+    <div class="grain"></div>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.34),rgba(0,0,0,.08) 45%,rgba(0,0,0,.44))"></div>
     <div class="chip">Vision</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <div class="st statement">IMXP brings humans into alignment with themselves, our planet, and the Cosmos</div>
