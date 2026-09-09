@@ -54,13 +54,29 @@
   .slide.photo .bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
   .slide.photo .shade{position:absolute;inset:0;z-index:1;
     background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.28) 45%,rgba(0,0,0,.62))}
-  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
+  .slide.photo>*:not(.bg):not(.bgvid):not(.shade):not(.vignette):not(.grain):not(.chip):not(.logo):not(.fd):not(.eventbadge){position:relative;z-index:2}
 
   /* looping muted background video (sits over .bg, under .shade) */
   .bgvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
     opacity:0;transition:opacity .9s ease}
   .bgvid.on{opacity:1}
   @media (prefers-reduced-motion:reduce){ .bgvid{display:none} }
+
+  /* cinematic treatment: slow drift, vignette, grade, film grain.
+     Keeps the same photo; adds depth and motion rather than replacing it. */
+  .bg.cine{filter:contrast(1.14) saturate(.88) brightness(.93);
+    transform:scale(1.07);transform-origin:52% 46%;will-change:transform}
+  .slide.active .bg.cine{animation:cinedrift 42s ease-in-out infinite alternate}
+  @keyframes cinedrift{
+    from{transform:scale(1.05) translate3d(-.7%,.5%,0)}
+    to{transform:scale(1.15) translate3d(.9%,-.9%,0)}
+  }
+  .vignette{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(118% 82% at 50% 44%,rgba(0,0,0,0) 34%,rgba(0,0,0,.5) 74%,rgba(0,0,0,.86) 100%)}
+  .grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.085;mix-blend-mode:overlay;
+    background-size:200px 200px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")}
+  @media (prefers-reduced-motion:reduce){ .slide.active .bg.cine{animation:none} }
 
   /* per-slide chrome (matches the Canva deck) */
   .chip{position:absolute;top:clamp(26px,4.6cqh,52px);left:var(--edge);z-index:3;
@@ -404,8 +420,10 @@
 
   <!-- 2 · MISSION -->
   <section class="slide photo center">
-    <div class="bg" style="background-image:url('media/photos/eclipse-sky.jpg')"></div>
-    <div class="shade"></div>
+    <div class="bg cine" style="background-image:url('media/photos/eclipse-sky.jpg')"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+    <div class="shade" style="background:linear-gradient(180deg,rgba(0,0,0,.5),rgba(0,0,0,.2) 46%,rgba(0,0,0,.6))"></div>
     <div class="chip">Mission</div>
     <div class="logo"><img src="imxp-logo.png" alt="" /></div>
     <div class="st statement">IMXP is building the operating system for the next generation of events</div>
