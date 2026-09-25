@@ -415,7 +415,6 @@
     background:#fff;color:#000;font-size:15px;font-weight:600;transition:opacity .15s}
   #gate button:hover{opacity:.85}
   #gate .err{color:#ff6b6b;font-size:13px;min-height:16px;text-align:left}
-  #gate .err.info{color:#7FD9C9}
   #gate .fine{color:rgba(255,255,255,.35);font-size:11px;margin-top:16px;line-height:1.5}
 
   @media (max-width:1024px) and (orientation:portrait){
@@ -724,10 +723,8 @@ go(start>=1&&start<=slides.length?start-1:0);
   pb.addEventListener('click',()=>{vid.controls=true;pb.classList.add('gone');vid.play();});
 })();
 
-/* email gate: pending-approval workflow (same status model as report.icelandeclipse.com's
-   access_requests) against the isolated imxp_deck_leads table via the deck_gate_request()
-   Postgres function. The table itself has zero client policies — a visitor can only ever
-   read/write through that function, never directly, so a visitor can't self-approve. */
+/* email gate: captures name + email into Supabase (australasia-eclipse-2028 project,
+   isolated imxp_deck_leads table, insert-only RLS), same pattern as the Midnight Sun deck gate */
 (function(){
   const KEY='imxp_deck_access';
   const SUPA_URL='https://qmxhsendoepqeyeolzil.supabase.co';
@@ -740,46 +737,25 @@ go(start>=1&&start<=slides.length?start-1:0);
   const err=document.getElementById('gateErr');
   const btn=document.getElementById('gateBtn');
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const BTN_LABEL=btn.textContent;
 
   function unlock(){
     try{localStorage.setItem(KEY,'1');}catch(_){}
     gate.classList.add('hide');
-  }
-  function setMsg(text,isError){
-    err.textContent=text;
-    err.classList.toggle('info',!isError);
-  }
-  function reset(label){
-    btn.disabled=false; btn.textContent=label||BTN_LABEL;
   }
 
   form.addEventListener('submit',e=>{
     e.preventDefault();
     const v=email.value.trim();
     const n=nameEl.value.trim();
-    if(!re.test(v)){setMsg('Please enter a valid email address.',true);email.focus();return;}
-    setMsg('',false);
-    btn.disabled=true; btn.textContent='Checking…';
-    fetch(SUPA_URL+'/rest/v1/rpc/deck_gate_request',{
+    if(!re.test(v)){err.textContent='Please enter a valid email address.';email.focus();return;}
+    err.textContent='';
+    btn.disabled=true; btn.textContent='Opening…';
+    const payload={email:v, name:n||null, source:'imxp-deck-gate', referrer:document.referrer||null, user_agent:navigator.userAgent};
+    fetch(SUPA_URL+'/rest/v1/imxp_deck_leads',{
       method:'POST',
-      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},
-      body:JSON.stringify({p_deck:'imxp', p_email:v, p_name:n||null, p_referrer:document.referrer||null, p_user_agent:navigator.userAgent})
-    }).then(r=>{ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
-      .then(status=>{
-        if(status==='approved'){ unlock(); return; }
-        if(status==='pending'){
-          setMsg("Thanks — your request has been sent for approval. You'll get access once it's approved.",false);
-          reset('Check again');
-          return;
-        }
-        setMsg('That request was not approved.',true);
-        reset();
-      })
-      .catch(()=>{
-        setMsg('Something went wrong checking access. Please try again in a moment.',true);
-        reset();
-      });
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
+      body:JSON.stringify(payload)
+    }).then(unlock).catch(unlock);   // never trap a real viewer behind a network hiccup
   });
   email.focus();
 })();
