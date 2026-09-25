@@ -432,6 +432,8 @@
     .s8 .osmod .n{font-size:.92rem} .s8 .osmod .d{font-size:.74rem}
     /* Upcoming events grid: two-up on portrait */
     .evgrid{grid-template-columns:repeat(2,1fr)}
+    /* Events (5): stack Iceland Eclipse / The Portal cards, don't squeeze two columns on a phone */
+    .gsplit{grid-template-columns:1fr;gap:14px}
   }
   @media (max-width:560px){
     .s8 .osband{grid-template-columns:1fr}
