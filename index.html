@@ -423,6 +423,8 @@
     /* tall slides scroll vertically (horizontal swipe still navigates); reclaim top/bottom padding */
     .slide{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch;
       padding:clamp(52px,7cqh,86px) clamp(20px,5cqw,40px) clamp(44px,6cqh,72px)}
+    /* short statement slides (Cover/Mission/Vision/Connect) stay vertically centered on mobile instead of pinning to the top */
+    .slide.center{justify-content:center}
     .arrows{display:none}
     /* Product (8): fit the roadmap to width, wrap the OS modules so they stay legible */
     .s8 .imgpanel img{max-height:none!important;width:100%!important;height:auto!important}
