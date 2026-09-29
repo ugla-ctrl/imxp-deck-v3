@@ -440,6 +440,10 @@
     .evgrid{grid-template-columns:repeat(2,1fr)}
     /* Events (5): stack Iceland Eclipse / The Portal cards, don't squeeze two columns on a phone */
     .gsplit{grid-template-columns:1fr;gap:14px}
+    /* Events (5) badge shrinks to a fixed 118px on mobile (see @container rule below), but the slide's
+       inline padding-top is still the desktop clamp sized for the much taller badge - that pushes both
+       cards down so far the second one runs off the bottom edge and gets clipped. Give it real headroom. */
+    .slide[style*="padding-top:clamp(186px"]{padding-top:150px!important}
   }
   @media (max-width:560px){
     .s8 .osband{grid-template-columns:1fr}
