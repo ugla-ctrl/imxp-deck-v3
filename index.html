@@ -727,10 +727,46 @@ go(start>=1&&start<=slides.length?start-1:0);
    isolated imxp_deck_leads table, insert-only RLS), same pattern as the Midnight Sun deck gate */
 (function(){
   const KEY='imxp_deck_access';
+  const EMAIL_KEY='imxp_deck_email';
   const SUPA_URL='https://qmxhsendoepqeyeolzil.supabase.co';
   const SUPA_KEY='sb_publishable_qU4HH0buJWQW3_RJk3QlYg_5r84ZfdP';
   const gate=document.getElementById('gate');
-  if(localStorage.getItem(KEY)){gate.classList.add('hide');return;}
+
+  /* View-duration tracking: active-tab time per session, upserted into
+     imxp_deck_views (separate table from the lead-capture gate above, so it
+     never touches the leads data). Email is attached when known -- just
+     submitted, or remembered from a prior visit -- otherwise the session is
+     tracked anonymously. Uses fetch(keepalive) rather than sendBeacon on
+     unload because Supabase's REST API needs the apikey/Authorization
+     headers, which sendBeacon can't send. */
+  function trackViews(email){
+    try{
+      const SID=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(16).slice(2)));
+      let activeMs=0, lastTick=(document.visibilityState==='visible'?Date.now():null), lastSent=-1;
+      function tick(){if(lastTick!==null){activeMs+=Date.now()-lastTick;lastTick=Date.now();}}
+      document.addEventListener('visibilitychange',()=>{tick();lastTick=document.visibilityState==='visible'?Date.now():null;});
+      function send(keepalive){
+        tick();
+        const seconds=Math.round(activeMs/1000);
+        if(seconds<3||seconds===lastSent)return;
+        lastSent=seconds;
+        fetch(SUPA_URL+'/rest/v1/imxp_deck_views',{
+          method:'POST', keepalive:!!keepalive,
+          headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
+          body:JSON.stringify({session_id:SID,email:email||null,seconds,updated_at:new Date().toISOString()})
+        }).catch(()=>{});
+      }
+      setInterval(()=>send(false),20000);
+      addEventListener('pagehide',()=>send(true));
+    }catch(_){}
+  }
+
+  if(localStorage.getItem(KEY)){
+    gate.classList.add('hide');
+    let saved=null; try{saved=localStorage.getItem(EMAIL_KEY);}catch(_){}
+    trackViews(saved);
+    return;
+  }
   const form=document.getElementById('gateForm');
   const nameEl=document.getElementById('gateName');
   const email=document.getElementById('gateEmail');
@@ -738,9 +774,10 @@ go(start>=1&&start<=slides.length?start-1:0);
   const btn=document.getElementById('gateBtn');
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  function unlock(){
-    try{localStorage.setItem(KEY,'1');}catch(_){}
+  function unlock(viewerEmail){
+    try{localStorage.setItem(KEY,'1'); if(viewerEmail)localStorage.setItem(EMAIL_KEY,viewerEmail);}catch(_){}
     gate.classList.add('hide');
+    trackViews(viewerEmail);
   }
 
   form.addEventListener('submit',e=>{
@@ -755,7 +792,7 @@ go(start>=1&&start<=slides.length?start-1:0);
       method:'POST',
       headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},
       body:JSON.stringify(payload)
-    }).then(unlock).catch(unlock);   // never trap a real viewer behind a network hiccup
+    }).then(()=>unlock(v)).catch(()=>unlock(v));   // never trap a real viewer behind a network hiccup
   });
   email.focus();
 })();
