@@ -746,26 +746,28 @@ go(start>=1&&start<=slides.length?start-1:0);
 
   /* View-duration tracking: active-tab time per session, upserted into
      imxp_deck_views (separate table from the lead-capture gate above, so it
-     never touches the leads data). Email is attached when known -- just
-     submitted, or remembered from a prior visit -- otherwise the session is
-     tracked anonymously. Uses fetch(keepalive) rather than sendBeacon on
-     unload because Supabase's REST API needs the apikey/Authorization
-     headers, which sendBeacon can't send. */
+     never touches the leads data). Writes go through the deck_view_beat()
+     database function (not a direct table upsert, which anon is not allowed
+     to do -- the update half was silently rejected). Email is attached when
+     known -- just submitted, or remembered from a prior visit -- otherwise
+     the session is tracked anonymously. Uses fetch(keepalive) rather than
+     sendBeacon on unload because Supabase's REST API needs the
+     apikey/Authorization headers, which sendBeacon can't send. */
   function trackViews(email){
     try{
       const SID=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(16).slice(2)));
       let activeMs=0, lastTick=(document.visibilityState==='visible'?Date.now():null), lastSent=-1;
       function tick(){if(lastTick!==null){activeMs+=Date.now()-lastTick;lastTick=Date.now();}}
-      document.addEventListener('visibilitychange',()=>{tick();lastTick=document.visibilityState==='visible'?Date.now():null;});
+      document.addEventListener('visibilitychange',()=>{tick();lastTick=document.visibilityState==='visible'?Date.now():null;if(document.visibilityState==='hidden')send(true);});
       function send(keepalive){
         tick();
         const seconds=Math.round(activeMs/1000);
         if(seconds<3||seconds===lastSent)return;
         lastSent=seconds;
-        fetch(SUPA_URL+'/rest/v1/imxp_deck_views',{
+        fetch(SUPA_URL+'/rest/v1/rpc/deck_view_beat',{
           method:'POST', keepalive:!!keepalive,
-          headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates,return=minimal'},
-          body:JSON.stringify({session_id:SID,email:email||null,seconds,updated_at:new Date().toISOString()})
+          headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json'},
+          body:JSON.stringify({p_deck:'imxp',p_session_id:SID,p_email:email||null,p_seconds:seconds})
         }).catch(()=>{});
       }
       setInterval(()=>send(false),20000);
