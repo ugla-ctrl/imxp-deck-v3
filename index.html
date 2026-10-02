@@ -757,7 +757,7 @@ go(start>=1&&start<=slides.length?start-1:0);
     try{
       const SID=(crypto.randomUUID?crypto.randomUUID():(Date.now()+'-'+Math.random().toString(16).slice(2)));
       let activeMs=0, lastTick=(document.visibilityState==='visible'?Date.now():null), lastSent=-1;
-      function tick(){if(lastTick!==null){activeMs+=Date.now()-lastTick;lastTick=Date.now();}}
+      function tick(){if(lastTick!==null){activeMs+=Math.min(Date.now()-lastTick,60000);lastTick=Date.now();}}
       document.addEventListener('visibilitychange',()=>{tick();lastTick=document.visibilityState==='visible'?Date.now():null;if(document.visibilityState==='hidden')send(true);});
       function send(keepalive){
         tick();
@@ -775,7 +775,8 @@ go(start>=1&&start<=slides.length?start-1:0);
     }catch(_){}
   }
 
-  if(localStorage.getItem(KEY)){
+  let seen=false; try{seen=!!localStorage.getItem(KEY);}catch(_){}
+  if(seen){
     gate.classList.add('hide');
     let saved=null; try{saved=localStorage.getItem(EMAIL_KEY);}catch(_){}
     trackViews(saved);
