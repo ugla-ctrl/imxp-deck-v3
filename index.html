@@ -444,6 +444,11 @@
        inline padding-top is still the desktop clamp sized for the much taller badge - that pushes both
        cards down so far the second one runs off the bottom edge and gets clipped. Give it real headroom. */
     .slide[style*="padding-top:clamp(186px"]{padding-top:150px!important}
+    /* Connect (10): the eclipse corona sits off to the right at the top of the source photo for the
+       16:9 desktop crop; on a narrow/tall viewport that same position pushes it almost entirely out of
+       frame, leaving just an empty gradient with a thin horizon sliver at the bottom. Recentre it so the
+       corona stays in view behind/near the content instead of reading as dead space. */
+    .s10 .bg{background-position:0% 42%!important}
   }
   @media (max-width:560px){
     .s8 .osband{grid-template-columns:1fr}
@@ -651,9 +656,9 @@
   </section>
 
   <!-- 10 · CONNECT -->
-  <section class="slide photo center">
-    <div class="bg" style="background-image:url('media/photos/golden-hug.jpg')"></div>
-    <div class="shade"></div>
+  <section class="slide photo center s10">
+    <div class="bg" style="background-image:url('media/photos/dorothy-space-eclipse.jpg');background-position:78% 14%"></div>
+    <div class="shade" style="background:radial-gradient(40% 36% at 50% 50%, rgba(0,0,0,.6), transparent 78%),linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.24) 40%,rgba(0,0,0,.72) 100%)"></div>
     <img class="st coverlogo" src="imxp-logo.png" alt="IMXP" />
     <div class="st tagbox">Realigning our Civilization<br/>with the Cosmos</div>
     <div class="st mt" style="font-family:var(--disp);font-weight:800;font-size:clamp(1.3rem,2.6vw,2.2rem)">Let&rsquo;s Connect</div>
