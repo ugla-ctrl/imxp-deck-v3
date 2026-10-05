@@ -408,11 +408,11 @@
   #gate p{color:rgba(255,255,255,.6);font-size:14px;line-height:1.5;margin-bottom:20px;max-width:none}
   #gate form{display:flex;flex-direction:column;gap:11px}
   #gate input{width:100%;padding:13px 15px;border-radius:9px;border:1px solid rgba(255,255,255,.22);
-    background:rgba(255,255,255,.06);color:#fff;font-size:15px;outline:none}
+    background:rgba(255,255,255,.06);color:#fff;font-size:16px;outline:none}
   #gate input:focus{border-color:rgba(255,255,255,.55)}
   #gate input::placeholder{color:rgba(255,255,255,.4)}
   #gate button{width:100%;padding:13px;border-radius:9px;border:none;cursor:pointer;
-    background:#fff;color:#000;font-size:15px;font-weight:600;transition:opacity .15s}
+    background:#fff;color:#000;font-size:15px;font-weight:600;min-height:44px;transition:opacity .15s}
   #gate button:hover{opacity:.85}
   #gate .err{color:#ff6b6b;font-size:13px;min-height:16px;text-align:left}
   #gate .fine{color:rgba(255,255,255,.35);font-size:11px;margin-top:16px;line-height:1.5}
@@ -716,6 +716,7 @@ const next=()=>go(i+1), prev=()=>go(i-1);
 document.getElementById('next').onclick=next;
 document.getElementById('prev').onclick=prev;
 addEventListener('keydown',e=>{
+  {const g=document.getElementById('gate');if(g&&!g.classList.contains('hide'))return;}  /* gate open: keys belong to the form */
   if(['ArrowRight','PageDown',' '].includes(e.key)){next();e.preventDefault();}
   if(['ArrowLeft','PageUp'].includes(e.key)){prev();e.preventDefault();}
   if(e.key==='Home')go(0); if(e.key==='End')go(slides.length-1);
@@ -793,7 +794,9 @@ go(start>=1&&start<=slides.length?start-1:0);
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(returning){const h=gate.querySelector('h2'),p=gate.querySelector('p');if(h)h.textContent='Welcome back.';if(p)p.textContent='Please confirm your email to continue.';nameEl.style.display='none';btn.textContent='Continue';}
 
+  var opened=false;
   function unlock(viewerEmail){
+    if(opened)return;opened=true;
     try{localStorage.setItem(KEY,'1'); if(viewerEmail)localStorage.setItem(EMAIL_KEY,viewerEmail);}catch(_){}
     gate.classList.add('hide');
     trackViews(viewerEmail);
@@ -807,6 +810,7 @@ go(start>=1&&start<=slides.length?start-1:0);
     err.textContent='';
     btn.disabled=true; btn.textContent='Opening…';
     if(returning){unlock(v);return;}   /* already a lead: just attach the email to this visit */
+    setTimeout(()=>unlock(v),4000);   /* a stalled request must not trap the viewer */
     const payload={email:v, name:n||null, source:'imxp-deck-gate', referrer:document.referrer||null, user_agent:navigator.userAgent};
     fetch(SUPA_URL+'/rest/v1/imxp_deck_leads',{
       method:'POST',
