@@ -848,8 +848,10 @@ go(start>=1&&start<=slides.length?start-1:0);
     if(!bgm)return;
     let muted=false; try{muted=localStorage.getItem('imxp_deck_bgm_muted')==='1';}catch(_){}
     if(muted){bgm.muted=true;}
+    function seek(){ try{ if(bgm.currentTime<1) bgm.currentTime=20; }catch(_){} }
     function go(){
-      try{bgm.currentTime=20;}catch(_){}
+      seek();
+      bgm.addEventListener('playing', seek, {once:true});
       const p=bgm.play();
       if(p&&p.catch)p.catch(()=>{ if(toggle)toggle.style.display='flex'; });
     }
