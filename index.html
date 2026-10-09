@@ -617,7 +617,7 @@
         <div class="lo">Location to be announced</div>
       </div>
     </div>
-    <p class="st calnote mt-s" style="max-width:none">Beyond 2028: Antarctic Expedition, Apophis 2029 Gathering, South Africa Eclipse 2030, continuing IMXP's global expansion and eventually <strong style="color:var(--lav);font-weight:800">the Lunar Solar Eclipse on the surface of the Moon targeted for 2035.</strong></p>
+    <p class="st calnote mt-s" style="max-width:none">Beyond 2028: Antarctic Expedition, Apophis 2029 Gathering, South Africa Eclipse 2030, continuing IMXP's global expansion and eventually <strong style="color:var(--yellow);font-weight:800">the Lunar Solar Eclipse on the surface of the Moon targeted for 2035.</strong></p>
   </section>
 
   <!-- 7 · PRODUCT · PLATFORM, CALENDAR + BUILD ROADMAP -->
@@ -657,7 +657,6 @@
       </div></div>
       <div class="rm-today" style="left:28.67%"><span>Today</span></div>
     </div>
-    <p class="st mt-s" style="max-width:none;color:rgba(255,255,255,.5);font-size:clamp(.6rem,.92cqw,.78rem)">Beyond 2027: Australasia Eclipse 2028, Apophis 2029, South Africa Eclipse 2030, and the Antarctic Expedition. 2035: watch Earth eclipse the Sun, from the Moon.</p>
   </section>
 
   <!-- 8 · FIAB VIDEO DEMO -->
@@ -708,7 +707,7 @@
 <div class="arrows"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
 
 <audio id="bgm" src="media/sea.mp3" loop preload="none"></audio>
-<button id="bgmToggle" aria-label="Mute background music" style="position:fixed;left:14px;bottom:14px;z-index:90;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(10,10,13,.55);backdrop-filter:blur(6px);color:#fff;font-size:14px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center">🔊</button>
+
 
 <!-- email gate (Option B, verbatim) -->
 <div id="gate">
@@ -844,28 +843,22 @@ go(start>=1&&start<=slides.length?start-1:0);
      has no gesture behind it, so the browser may block it -- in that case show the toggle
      button already un-muted-looking so one tap starts it instead of leaving it silently dead. */
   function startBgm(){
-    const bgm=document.getElementById('bgm'), toggle=document.getElementById('bgmToggle');
+    const bgm=document.getElementById('bgm');
     if(!bgm)return;
-    let muted=false; try{muted=localStorage.getItem('imxp_deck_bgm_muted')==='1';}catch(_){}
-    if(muted){bgm.muted=true;}
     function seek(){ try{ if(bgm.currentTime<1) bgm.currentTime=20; }catch(_){} }
+    function armFallback(){
+      function resume(){ seek(); bgm.play().catch(()=>{}); }
+      ['pointerdown','keydown','touchstart'].forEach(ev=>{
+        document.addEventListener(ev, resume, {once:true, passive:true});
+      });
+    }
     function go(){
       seek();
       bgm.addEventListener('playing', seek, {once:true});
       const p=bgm.play();
-      if(p&&p.catch)p.catch(()=>{ if(toggle)toggle.style.display='flex'; });
+      if(p&&p.catch){p.catch(armFallback);}else if(!p){armFallback();}
     }
     if(bgm.readyState>=1){go();}else{bgm.addEventListener('loadedmetadata',go,{once:true});bgm.load();}
-    if(toggle){
-      toggle.style.display='flex';
-      toggle.textContent=bgm.muted?'🔇':'🔊';
-      toggle.onclick=()=>{
-        if(bgm.paused){bgm.muted=false;bgm.play().catch(()=>{});toggle.textContent='🔊';try{localStorage.setItem('imxp_deck_bgm_muted','0');}catch(_){}return;}
-        bgm.muted=!bgm.muted;
-        toggle.textContent=bgm.muted?'🔇':'🔊';
-        try{localStorage.setItem('imxp_deck_bgm_muted',bgm.muted?'1':'0');}catch(_){}
-      };
-    }
   }
 
   form.addEventListener('submit',e=>{
