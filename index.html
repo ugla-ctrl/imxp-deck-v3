@@ -13,7 +13,11 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://deck.imxp.org/media/thumbnail.jpg" />
 <meta name="theme-color" content="#000000" />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='black'/><text y='72' x='50' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>i</text></svg>" />
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="media/brand/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="media/brand/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="media/brand/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="media/brand/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -703,6 +707,9 @@
 <div id="dots"></div>
 <div class="arrows"><button id="prev" aria-label="Previous">‹</button><button id="next" aria-label="Next">›</button></div>
 
+<audio id="bgm" src="media/sea.mp3" loop preload="none"></audio>
+<button id="bgmToggle" aria-label="Mute background music" style="position:fixed;left:14px;bottom:14px;z-index:90;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(10,10,13,.55);backdrop-filter:blur(6px);color:#fff;font-size:14px;line-height:1;cursor:pointer;display:none;align-items:center;justify-content:center">🔊</button>
+
 <!-- email gate (Option B, verbatim) -->
 <div id="gate">
   <div class="card">
@@ -814,7 +821,7 @@ go(start>=1&&start<=slides.length?start-1:0);
   let saved=null;try{saved=localStorage.getItem(EMAIL_KEY);}catch(_){}
   /* unlocked before emails were saved: ask once, so every recorded view has an email address */
   const returning=seen&&!saved;
-  if(seen&&saved){gate.classList.add('hide');trackViews(saved);return;}
+  if(seen&&saved){gate.classList.add('hide');trackViews(saved);startBgm();return;}
   const form=document.getElementById('gateForm');
   const nameEl=document.getElementById('gateName');
   const email=document.getElementById('gateEmail');
@@ -829,6 +836,30 @@ go(start>=1&&start<=slides.length?start-1:0);
     try{localStorage.setItem(KEY,'1'); if(viewerEmail)localStorage.setItem(EMAIL_KEY,viewerEmail);}catch(_){}
     gate.classList.add('hide');
     trackViews(viewerEmail);
+    startBgm();
+  }
+
+  /* Background music: starts the moment the gate clears. A fresh "View deck" click is a
+     direct user gesture so autoplay is always allowed; a returning visitor's silent auto-hide
+     has no gesture behind it, so the browser may block it -- in that case show the toggle
+     button already un-muted-looking so one tap starts it instead of leaving it silently dead. */
+  function startBgm(){
+    const bgm=document.getElementById('bgm'), toggle=document.getElementById('bgmToggle');
+    if(!bgm)return;
+    let muted=false; try{muted=localStorage.getItem('imxp_deck_bgm_muted')==='1';}catch(_){}
+    if(muted){bgm.muted=true;}
+    const p=bgm.play();
+    if(p&&p.catch)p.catch(()=>{ if(toggle)toggle.style.display='flex'; });
+    if(toggle){
+      toggle.style.display='flex';
+      toggle.textContent=bgm.muted?'🔇':'🔊';
+      toggle.onclick=()=>{
+        if(bgm.paused){bgm.muted=false;bgm.play().catch(()=>{});toggle.textContent='🔊';try{localStorage.setItem('imxp_deck_bgm_muted','0');}catch(_){}return;}
+        bgm.muted=!bgm.muted;
+        toggle.textContent=bgm.muted?'🔇':'🔊';
+        try{localStorage.setItem('imxp_deck_bgm_muted',bgm.muted?'1':'0');}catch(_){}
+      };
+    }
   }
 
   form.addEventListener('submit',e=>{
