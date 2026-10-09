@@ -848,8 +848,12 @@ go(start>=1&&start<=slides.length?start-1:0);
     if(!bgm)return;
     let muted=false; try{muted=localStorage.getItem('imxp_deck_bgm_muted')==='1';}catch(_){}
     if(muted){bgm.muted=true;}
-    const p=bgm.play();
-    if(p&&p.catch)p.catch(()=>{ if(toggle)toggle.style.display='flex'; });
+    function go(){
+      try{bgm.currentTime=20;}catch(_){}
+      const p=bgm.play();
+      if(p&&p.catch)p.catch(()=>{ if(toggle)toggle.style.display='flex'; });
+    }
+    if(bgm.readyState>=1){go();}else{bgm.addEventListener('loadedmetadata',go,{once:true});bgm.load();}
     if(toggle){
       toggle.style.display='flex';
       toggle.textContent=bgm.muted?'🔇':'🔊';
