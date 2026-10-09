@@ -818,16 +818,16 @@ go(start>=1&&start<=slides.length?start-1:0);
 
   let seen=false; try{seen=!!localStorage.getItem(KEY);}catch(_){}
   let saved=null;try{saved=localStorage.getItem(EMAIL_KEY);}catch(_){}
-  /* unlocked before emails were saved: ask once, so every recorded view has an email address */
-  const returning=seen&&!saved;
-  if(seen&&saved){gate.classList.add('hide');trackViews(saved);startBgm();return;}
+  /* Gate always shows -- never auto-skipped -- so every visit's "Continue"/"View deck" click
+     is a real user gesture and audio autoplay is never silently blocked by browser policy. */
+  const returning=seen;
   const form=document.getElementById('gateForm');
   const nameEl=document.getElementById('gateName');
   const email=document.getElementById('gateEmail');
   const err=document.getElementById('gateErr');
   const btn=document.getElementById('gateBtn');
   const re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(returning){const h=gate.querySelector('h2'),p=gate.querySelector('p');if(h)h.textContent='Welcome back.';if(p)p.textContent='Please confirm your email to continue.';nameEl.style.display='none';btn.textContent='Continue';}
+  if(returning){const h=gate.querySelector('h2'),p=gate.querySelector('p');if(h)h.textContent='Welcome back.';if(p)p.textContent='Please confirm your email to continue.';nameEl.style.display='none';btn.textContent='Continue';if(saved)email.value=saved;}
 
   var opened=false;
   function unlock(viewerEmail){
